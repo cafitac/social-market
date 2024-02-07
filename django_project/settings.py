@@ -134,22 +134,13 @@ LOGGING = {
         }
     },
     "formatters": {
-        "django.server": {
-            "()": "django.utils.log.ServerFormatter",
-            "format": "[{server_time}] {message}",
-            "style": "{",
-        }
+        "standard": {"format": "%(asctime)s [%(levelname)s] %(name)s: %(message)s"},
     },
     "handlers": {
         "console": {
-            "level": "INFO",
-            "filters": ["require_debug_true"],
+            "level": "DEBUG",
+            "formatter": "standard",
             "class": "logging.StreamHandler",
-        },
-        "django.server": {
-            "level": "INFO",
-            "class": "logging.StreamHandler",
-            "formatter": "django.server",
         },
         "mail_admins": {
             "level": "ERROR",
@@ -158,16 +149,7 @@ LOGGING = {
         },
     },
     'loggers': {
-        "django": {
-            "handlers": ["console", "mail_admins"],
-            "level": "INFO",
-        },
-        "django.server": {
-            "handlers": ["django.server"],
-            "level": "INFO",
-            "propagate": False,
-        },
-        'django.db.backends.sqlite3': {
+        'django.db.backends': {
             'level': 'DEBUG',
             'handlers': ['console'],
         }
