@@ -11,9 +11,9 @@ class UserCommandService:
         serializer.is_valid(raise_exception=True)
         self._check_before_save_user(serializer)
 
-        user: User = User(username=serializer.validated_data['username'],
-                          password=make_password(serializer.validated_data['password']),
-                          email=serializer.validated_data['email'])
+        user: User = User.create(serializer.validated_data['username'],
+                                 serializer.validated_data['password'],
+                                 serializer.validated_data['email'])
         user.save()
 
         return UserSerializer(user)
