@@ -2,7 +2,7 @@ from rest_framework import status, viewsets
 from rest_framework.response import Response
 
 from member.models import User
-from member.serializers import UserCreateSerializer
+from member.serializers import UserCreateSerializer, UserSerializer
 from member.services import UserCommandService
 
 
@@ -16,7 +16,7 @@ class UserViewSet(viewsets.GenericViewSet):
         return super().get_serializer(*args, **kwargs)
 
     def create(self, request, *args, **kwargs):
-        serializer: UserCreateSerializer = self.get_serializer(data=request.data)
-        UserCommandService().save_user(serializer)
+        create_serializer: UserCreateSerializer = self.get_serializer(data=request.data)
+        serializer: UserSerializer = UserCommandService().save_user(create_serializer)
 
-        return Response(data={}, status=status.HTTP_200_OK)
+        return Response(data=serializer.data, status=status.HTTP_201_CREATED)
