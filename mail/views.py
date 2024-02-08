@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.views.decorators.http import require_http_methods
 
-from domain.mail.services.mail_command_service import MailCommandService
+from mail.services.mail_command_service import MailCommandService
 
 
 @require_http_methods(["GET"])

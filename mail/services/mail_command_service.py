@@ -1,6 +1,6 @@
 from rest_framework.exceptions import ValidationError
 
-from domain.mail.models import UserActiveMail
+from mail.models import UserActiveMail
 
 
 class MailCommandService:
