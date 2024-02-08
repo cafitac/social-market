@@ -9,7 +9,7 @@ class UserActiveMail(AbstractBaseModel):
     """
 
     user_id = models.BigIntegerField(null=False, unique=True)
-    activate_code = models.CharField(max_length=128, null=False, unique=True)
+    active_code = models.CharField(max_length=128, null=False, unique=True)
     is_expired = models.BooleanField(default=False)
 
     class Meta:
