@@ -1,9 +1,9 @@
 from rest_framework import status, viewsets
 from rest_framework.response import Response
 
-from member.models import User
-from member.serializers import UserCreateSerializer, UserSerializer
-from member.services import UserCommandService
+from domain.member.models import User
+from domain.member.serializers import UserCreateSerializer, UserSerializer
+from domain.member.services import UserCommandService
 
 
 class UserViewSet(viewsets.GenericViewSet):
