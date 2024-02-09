@@ -3,7 +3,6 @@ from rest_framework.response import Response
 
 from member.models import User
 from member.serializers import UserCreateSerializer, UserSerializer
-from member.services import UserCommandService
 from usecase.user_register import UserRegisterUseCase
 
 

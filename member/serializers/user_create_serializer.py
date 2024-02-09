@@ -1,16 +1,11 @@
 from rest_framework import serializers
 
-from member.models import User
-
-
-class UserSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = User
-        fields = ('id', 'username', 'email', )
-
 
 class UserCreateSerializer(serializers.Serializer):
+    """
+    사용자 생성 시리얼라이저
+    """
+
     username = serializers.CharField(max_length=150, allow_blank=False)
     password = serializers.CharField(max_length=30, allow_blank=False, style={
         'input_type': 'password',
