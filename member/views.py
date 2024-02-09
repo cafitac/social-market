@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from member.models import User
 from member.serializers import UserCreateSerializer, UserSerializer
 from member.services import UserCommandService
+from usecase.user_register import UserRegisterUseCase
 
 
 class UserViewSet(viewsets.GenericViewSet):
@@ -17,6 +18,6 @@ class UserViewSet(viewsets.GenericViewSet):
 
     def create(self, request, *args, **kwargs):
         create_serializer: UserCreateSerializer = self.get_serializer(data=request.data)
-        serializer: UserSerializer = UserCommandService().save_user(create_serializer)
+        serializer: UserSerializer = UserRegisterUseCase.execute(create_serializer)
 
         return Response(data=serializer.data, status=status.HTTP_201_CREATED)

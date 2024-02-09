@@ -1,3 +1,6 @@
+from time import time
+from uuid import uuid4
+
 from django.db import models
 
 from utils.model.base import AbstractBaseModel
@@ -16,6 +19,11 @@ class UserActiveMail(AbstractBaseModel):
         db_table = "user_active_mail"
         verbose_name = "User Active Mail"
         verbose_name_plural = f"{verbose_name} List"
+
+    @staticmethod
+    def create(user_id):
+        active_code: str = str(uuid4()) + str(time())
+        return UserActiveMail(user_id=user_id, active_code=active_code)
 
     def expired(self):
         self.is_expired = True
