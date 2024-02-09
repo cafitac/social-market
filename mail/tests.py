@@ -1,5 +1,6 @@
 from django.test import TestCase
 
+from member.models import User
 from utils.test.fixtures import TestFixture
 
 
@@ -20,3 +21,6 @@ class MailViewTestCase(TestCase):
         user_active_mail.refresh_from_db()
 
         self.assertTrue(user_active_mail.is_expired)
+
+        user: User = User.objects.get(pk=user_active_mail.user_id)
+        self.assertTrue(user.is_active)
