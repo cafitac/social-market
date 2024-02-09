@@ -31,3 +31,13 @@ class UserCommandService:
     def _check_password_and_re_password_is_same(password: str, re_password: str) -> None:
         if not password == re_password:
             raise ValidationError("비밀번호가 일치하지 않습니다.")
+
+    @staticmethod
+    def active_user(user_id):
+        try:
+            user: User = User.objects.get(pk=user_id)
+        except User.DoesNotExist:
+            raise ValidationError("존재하지 않는 사용자입니다.")
+
+        user.is_active = True
+        user.save()

@@ -6,6 +6,9 @@ from member.services import UserCommandService
 
 
 class UserRegisterUseCase:
+    """
+    사용자 회원가입 로직
+    """
 
     @staticmethod
     @transaction.atomic
