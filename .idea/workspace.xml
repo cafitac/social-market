@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="3caa0b6a-71b9-44f8-a3e7-adb6bbb6aa5b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/merchandise/models/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/merchandise/models/models.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,11 +60,11 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/merchandise/models" />
       <recent name="$PROJECT_DIR$/member/serializers" />
       <recent name="$PROJECT_DIR$/member/services" />
       <recent name="$PROJECT_DIR$/member/models" />
       <recent name="$PROJECT_DIR$/mail/models" />
-      <recent name="$PROJECT_DIR$" />
     </key>
   </component>
   <component name="RunManager" selected="Django tests.Test: all">
@@ -220,7 +220,7 @@
       <updated>1707285826090</updated>
       <workItem from="1707285827737" duration="13731000" />
       <workItem from="1707337141872" duration="7120000" />
-      <workItem from="1707369234176" duration="10499000" />
+      <workItem from="1707369234176" duration="10846000" />
     </task>
     <servers />
   </component>
