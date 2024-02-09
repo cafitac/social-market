@@ -4,13 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3caa0b6a-71b9-44f8-a3e7-adb6bbb6aa5b" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mail/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/mail/models/user_active_mail.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/member/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/member/models/user.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/member/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/member/serializers/user_serializer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/member/services.py" beforeDir="false" afterPath="$PROJECT_DIR$/member/services/user_command.py" afterDir="false" />
-    </list>
+    <list default="true" id="3caa0b6a-71b9-44f8-a3e7-adb6bbb6aa5b" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -70,7 +64,28 @@
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
-  <component name="RunManager" selected="Django tests.Test: mail.tests.MailViewTestCase.test_사용자가_메일_인증을_통해_계정을_활성화합니다">
+  <component name="RunManager" selected="Django tests.Test: all">
+    <configuration name="Test: all" type="DjangoTestsConfigurationType">
+      <module name="social-market" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="$PROJECT_DIR$/venv/bin/python" />
+      <option name="SDK_NAME" value="Python 3.11 (social-market) (2)" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="TARGET" value="" />
+      <option name="SETTINGS_FILE" value="" />
+      <option name="CUSTOM_SETTINGS" value="false" />
+      <option name="USE_OPTIONS" value="false" />
+      <option name="OPTIONS" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="Test: domain.mail.tests.MailViewTestCase.test_사용자가_메일_인증을_통해_계정을_활성화합니다" type="DjangoTestsConfigurationType" temporary="true">
       <module name="social-market" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -175,6 +190,14 @@
       <option name="customRunCommand" value="" />
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="Django Server.social-market" />
+      <item itemvalue="Django tests.Test: all" />
+      <item itemvalue="Django tests.Test: domain.mail.tests.MailViewTestCase.test_사용자가_메일_인증을_통해_계정을_활성화합니다" />
+      <item itemvalue="Django tests.Test: mail.tests.MailViewTestCase.test_사용자가_메일_인증을_통해_계정을_활성화합니다" />
+      <item itemvalue="Django tests.Test: member.tests.UserTestCase.test_사용자가_회원가입을_합니다" />
+      <item itemvalue="Django tests.Test: member.tests.UserViewTestCase.test_사용자가_회원가입을_합니다" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Django tests.Test: mail.tests.MailViewTestCase.test_사용자가_메일_인증을_통해_계정을_활성화합니다" />
@@ -194,7 +217,7 @@
       <updated>1707285826090</updated>
       <workItem from="1707285827737" duration="13731000" />
       <workItem from="1707337141872" duration="7120000" />
-      <workItem from="1707369234176" duration="9624000" />
+      <workItem from="1707369234176" duration="9720000" />
     </task>
     <servers />
   </component>
