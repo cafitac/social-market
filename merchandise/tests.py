@@ -15,7 +15,7 @@ class MerchandiseViewTestCase(TestCase):
         self.client.force_login(self.사용자)
 
         res = self.client.post(
-            path="/api/merchandise",
+            path="/api/merchandise/merchandises",
             data={
                 "name": "상품",
                 "description": "상품 설명",
