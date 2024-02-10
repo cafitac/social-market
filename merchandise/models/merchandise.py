@@ -20,6 +20,9 @@ class Merchandise(AbstractBaseModel):
     def create(user_id: int, name: str, description: str, price: int) -> 'Merchandise':
         return Merchandise(user_id=user_id, name=name, description=description, price=price)
 
+    def is_owner(self, user_id):
+        return self.user_id == user_id
+
     def update(self, update_data) -> List[str]:
         update_fields = []
 
