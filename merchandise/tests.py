@@ -50,3 +50,22 @@ class MerchandiseViewTestCase(TestCase):
         data = res.json()
 
         self.assertEquals(data['name'], merchandise.name)
+
+    def test_update_own_merchandise(self):
+        merchandise: Merchandise = self.test_create_merchandise()
+
+        res = self.client.patch(
+            path=f"/api/merchandise/merchandises/{merchandise.id}",
+            data={
+                "name": "수정된 상품 이름",
+                "description": "수정된 상품 설명",
+                "price": 5000,
+            },
+            content_type="application/json",
+        )
+        self.assertEquals(res.status_code, 200)
+
+        data = res.json()
+        merchandise.refresh_from_db()
+
+        self.assertEquals(merchandise.name, "수정된 상품 이름")
