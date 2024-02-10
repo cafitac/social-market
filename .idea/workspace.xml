@@ -6,7 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="3caa0b6a-71b9-44f8-a3e7-adb6bbb6aa5b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/merchandise/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/merchandise/tests.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/merchandise/services/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/merchandise/services/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/merchandise/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/merchandise/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,7 +68,7 @@
       <recent name="$PROJECT_DIR$/mail/models" />
     </key>
   </component>
-  <component name="RunManager" selected="Django tests.Test: merchandise.tests.MerchandiseViewTestCase.test_create_merchandise">
+  <component name="RunManager" selected="Django tests.Test: merchandise.tests.MerchandiseViewTestCase.test_get_own_merchandises">
     <configuration name="Test: all" type="DjangoTestsConfigurationType">
       <module name="social-market" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -129,26 +130,6 @@
       <option name="OPTIONS" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="Test: member.tests.UserTestCase.test_사용자가_회원가입을_합니다" type="DjangoTestsConfigurationType" temporary="true">
-      <module name="social-market" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="TARGET" value="member.tests.UserTestCase.test_사용자가_회원가입을_합니다" />
-      <option name="SETTINGS_FILE" value="" />
-      <option name="CUSTOM_SETTINGS" value="false" />
-      <option name="USE_OPTIONS" value="false" />
-      <option name="OPTIONS" value="" />
-      <method v="2" />
-    </configuration>
     <configuration name="Test: member.tests.UserViewTestCase.test_사용자가_회원가입을_합니다" type="DjangoTestsConfigurationType" temporary="true">
       <module name="social-market" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -189,6 +170,26 @@
       <option name="OPTIONS" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="Test: merchandise.tests.MerchandiseViewTestCase.test_get_own_merchandises" type="DjangoTestsConfigurationType" temporary="true">
+      <module name="social-market" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="TARGET" value="merchandise.tests.MerchandiseViewTestCase.test_get_own_merchandises" />
+      <option name="SETTINGS_FILE" value="" />
+      <option name="CUSTOM_SETTINGS" value="false" />
+      <option name="USE_OPTIONS" value="false" />
+      <option name="OPTIONS" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="social-market" type="Python.DjangoServer" factoryName="Django server">
       <module name="social-market" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -216,19 +217,19 @@
     <list>
       <item itemvalue="Django Server.social-market" />
       <item itemvalue="Django tests.Test: all" />
+      <item itemvalue="Django tests.Test: merchandise.tests.MerchandiseViewTestCase.test_get_own_merchandises" />
       <item itemvalue="Django tests.Test: merchandise.tests.MerchandiseViewTestCase.test_create_merchandise" />
       <item itemvalue="Django tests.Test: domain.mail.tests.MailViewTestCase.test_사용자가_메일_인증을_통해_계정을_활성화합니다" />
       <item itemvalue="Django tests.Test: mail.tests.MailViewTestCase.test_사용자가_메일_인증을_통해_계정을_활성화합니다" />
-      <item itemvalue="Django tests.Test: member.tests.UserTestCase.test_사용자가_회원가입을_합니다" />
       <item itemvalue="Django tests.Test: member.tests.UserViewTestCase.test_사용자가_회원가입을_합니다" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Django tests.Test: merchandise.tests.MerchandiseViewTestCase.test_get_own_merchandises" />
         <item itemvalue="Django tests.Test: merchandise.tests.MerchandiseViewTestCase.test_create_merchandise" />
         <item itemvalue="Django tests.Test: mail.tests.MailViewTestCase.test_사용자가_메일_인증을_통해_계정을_활성화합니다" />
         <item itemvalue="Django tests.Test: member.tests.UserViewTestCase.test_사용자가_회원가입을_합니다" />
         <item itemvalue="Django tests.Test: domain.mail.tests.MailViewTestCase.test_사용자가_메일_인증을_통해_계정을_활성화합니다" />
-        <item itemvalue="Django tests.Test: member.tests.UserTestCase.test_사용자가_회원가입을_합니다" />
       </list>
     </recent_temporary>
   </component>
@@ -243,12 +244,23 @@
       <workItem from="1707285827737" duration="13731000" />
       <workItem from="1707337141872" duration="7120000" />
       <workItem from="1707369234176" duration="11999000" />
-      <workItem from="1707476438024" duration="4828000" />
+      <workItem from="1707476438024" duration="5577000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/merchandise/services/merchandise_query.py</url>
+          <line>13</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/social_market$Test__mail_tests_MailViewTestCase_test______.coverage" NAME="Test: mail.tests.MailViewTestCase.test_사용자가_메일_인증을_통해_계정을_활성화합니다 Coverage Results" MODIFIED="1707473263855" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
@@ -257,5 +269,6 @@
     <SUITE FILE_PATH="coverage/social_market$Test__member_tests_UserTestCase_test___.coverage" NAME="Test: member.tests.UserTestCase.test_사용자가_회원가입을_합니다 Coverage Results" MODIFIED="1707337321604" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/social_market$Test__domain_mail_tests_MailViewTestCase_test______.coverage" NAME="Test: domain.mail.tests.MailViewTestCase.test_사용자가_메일_인증을_통해_계정을_활성화합니다 Coverage Results" MODIFIED="1707370392377" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/social_market$Test__all.coverage" NAME="Test: all Coverage Results" MODIFIED="1707474231684" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/social_market$Test__merchandise_tests_MerchandiseViewTestCase_test_get_own_merchandises.coverage" NAME="Test: merchandise.tests.MerchandiseViewTestCase.test_get_own_merchandises Coverage Results" MODIFIED="1707527060882" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
   </component>
 </project>
