@@ -28,3 +28,13 @@ class MerchandiseViewTestCase(TestCase):
         data = res.json()
 
         self.assertTrue(Merchandise.objects.filter(pk=data['id']).exists())
+
+    def test_get_own_merchandises(self):
+        self.test_create_merchandise()
+
+        res = self.client.get(path="/api/merchandise/merchandises")
+        self.assertEquals(res.status_code, 200)
+
+        data = res.json()
+
+        self.assertEquals(len(data), 1)
