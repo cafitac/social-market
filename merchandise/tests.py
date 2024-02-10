@@ -11,7 +11,7 @@ class MerchandiseViewTestCase(TestCase):
         self.사용자: User = TestFixture().active_user
         self.사용자.save()
 
-    def test_create_merchandise(self):
+    def test_create_merchandise(self) -> Merchandise:
         self.client.force_login(self.사용자)
 
         res = self.client.post(
@@ -29,6 +29,8 @@ class MerchandiseViewTestCase(TestCase):
 
         self.assertTrue(Merchandise.objects.filter(pk=data['id']).exists())
 
+        return Merchandise.objects.get(pk=data['id'])
+
     def test_get_own_merchandises(self):
         self.test_create_merchandise()
 
@@ -38,3 +40,13 @@ class MerchandiseViewTestCase(TestCase):
         data = res.json()
 
         self.assertEquals(len(data), 1)
+
+    def test_get_own_merchandise(self):
+        merchandise: Merchandise = self.test_create_merchandise()
+
+        res = self.client.get(path=f"/api/merchandise/merchandises/{merchandise.id}")
+        self.assertEquals(res.status_code, 200)
+
+        data = res.json()
+
+        self.assertEquals(data['name'], merchandise.name)
