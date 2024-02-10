@@ -86,3 +86,11 @@ class MerchandiseViewTestCase(TestCase):
             content_type="application/json",
         )
         self.assertEquals(res.status_code, 403)
+
+    def test_사용자가_자신이_등록한_상품을_삭제할_수_있다(self):
+        merchandise: Merchandise = self.test_사용자가_상품을_등록할_수_있다()
+
+        res = self.client.delete(path=f"/api/merchandise/merchandises/{merchandise.id}")
+        self.assertEquals(res.status_code, 204)
+
+        self.assertFalse(Merchandise.objects.filter(pk=merchandise.id).exists())
