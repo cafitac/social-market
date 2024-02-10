@@ -11,6 +11,7 @@ from merchandise.services import MerchandiseCommandService, MerchandiseQueryServ
 
 class MerchandiseViewSet(viewsets.GenericViewSet):
     queryset = Merchandise.objects.all()[:10]
+    lookup_field = "pk"
 
     def get_serializer(self, *args, **kwargs):
         if self.action == 'create':
@@ -29,6 +30,11 @@ class MerchandiseViewSet(viewsets.GenericViewSet):
     def create(self, request, *args, **kwargs):
         request_user: User = request.user
         merchandise_create_serializer: MerchandiseCreateSerializer = self.get_serializer(data=request.data)
-        serializer = MerchandiseCommandService.create(request_user.id, merchandise_create_serializer)
+        serializer: MerchandiseSerializer = MerchandiseCommandService.create(request_user.id, merchandise_create_serializer)
 
         return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+    def retrieve(self, request, pk=None):
+        serializer: MerchandiseSerializer = MerchandiseQueryService.get_merchandise(pk)
+
+        return Response(serializer.data, status=status.HTTP_200_OK)
