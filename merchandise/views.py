@@ -13,7 +13,7 @@ class MerchandiseViewSet(viewsets.GenericViewSet):
     queryset = Merchandise.objects.all()[:10]
     lookup_field = "pk"
 
-    def get_permissions(self, *args, **kwargs):
+    def get_permissions(self):
         if self.action == 'create':
             self.permission_classes = [IsAuthenticated, ]
         elif self.action == 'list':
@@ -23,7 +23,7 @@ class MerchandiseViewSet(viewsets.GenericViewSet):
         elif self.action == 'partial_update':
             self.permission_classes = [IsAuthenticated, ]
 
-        return super().get_permissions(*args, **kwargs)
+        return super().get_permissions()
 
     def get_serializer(self, *args, **kwargs):
         if self.action == 'create':
@@ -59,3 +59,8 @@ class MerchandiseViewSet(viewsets.GenericViewSet):
         serializer: MerchandiseSerializer = MerchandiseCommandService.update(request_user.id, pk, update_serializer)
 
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+    def destroy(self, request, pk=None):
+        MerchandiseCommandService.delete(pk)
+
+        return Response(status=status.HTTP_204_NO_CONTENT)

@@ -34,3 +34,8 @@ class MerchandiseCommandService:
         merchandise.save(update_fields=update_fields)
 
         return MerchandiseSerializer(merchandise)
+
+    @staticmethod
+    def delete(pk: int):
+        merchandise: Merchandise = MerchandiseQueryService.get_merchandise(pk)
+        merchandise.delete()
