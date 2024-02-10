@@ -5,6 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3caa0b6a-71b9-44f8-a3e7-adb6bbb6aa5b" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -66,7 +67,7 @@
       <recent name="$PROJECT_DIR$/mail/models" />
     </key>
   </component>
-  <component name="RunManager" selected="Django tests.Test: merchandise.tests.MerchandiseViewTestCase.test_update_own_merchandise">
+  <component name="RunManager" selected="Django tests.Test: merchandise.tests.MerchandiseViewTestCase.test_기타_사용자는_사용자가_등록한_상품의_정보를_수정할_수_없다">
     <configuration name="Test: all" type="DjangoTestsConfigurationType">
       <module name="social-market" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -108,7 +109,7 @@
       <option name="OPTIONS" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="Test: merchandise.tests.MerchandiseViewTestCase.test_create_merchandise" type="DjangoTestsConfigurationType" temporary="true">
+    <configuration name="Test: merchandise.tests.MerchandiseViewTestCase.test_기타_사용자는_사용자가_등록한_상품의_정보를_수정할_수_없다" type="DjangoTestsConfigurationType" temporary="true">
       <module name="social-market" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -121,7 +122,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="TARGET" value="merchandise.tests.MerchandiseViewTestCase.test_create_merchandise" />
+      <option name="TARGET" value="merchandise.tests.MerchandiseViewTestCase.test_기타_사용자는_사용자가_등록한_상품의_정보를_수정할_수_없다" />
       <option name="SETTINGS_FILE" value="" />
       <option name="CUSTOM_SETTINGS" value="false" />
       <option name="USE_OPTIONS" value="false" />
@@ -219,15 +220,15 @@
       <item itemvalue="Django tests.Test: merchandise.tests.MerchandiseViewTestCase.test_get_own_merchandise" />
       <item itemvalue="Django tests.Test: merchandise.tests.MerchandiseViewTestCase.test_get_own_merchandises" />
       <item itemvalue="Django tests.Test: merchandise.tests.MerchandiseViewTestCase.test_update_own_merchandise" />
-      <item itemvalue="Django tests.Test: merchandise.tests.MerchandiseViewTestCase.test_create_merchandise" />
+      <item itemvalue="Django tests.Test: merchandise.tests.MerchandiseViewTestCase.test_기타_사용자는_사용자가_등록한_상품의_정보를_수정할_수_없다" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Django tests.Test: merchandise.tests.MerchandiseViewTestCase.test_기타_사용자는_사용자가_등록한_상품의_정보를_수정할_수_없다" />
         <item itemvalue="Django tests.Test: merchandise.tests.MerchandiseViewTestCase.test_update_own_merchandise" />
         <item itemvalue="Django tests.Test: merchandise.tests.MerchandiseViewTestCase" />
         <item itemvalue="Django tests.Test: merchandise.tests.MerchandiseViewTestCase.test_get_own_merchandise" />
         <item itemvalue="Django tests.Test: merchandise.tests.MerchandiseViewTestCase.test_get_own_merchandises" />
-        <item itemvalue="Django tests.Test: merchandise.tests.MerchandiseViewTestCase.test_create_merchandise" />
       </list>
     </recent_temporary>
   </component>
@@ -242,7 +243,7 @@
       <workItem from="1707285827737" duration="13731000" />
       <workItem from="1707337141872" duration="7120000" />
       <workItem from="1707369234176" duration="11999000" />
-      <workItem from="1707476438024" duration="11125000" />
+      <workItem from="1707476438024" duration="11725000" />
     </task>
     <servers />
   </component>
@@ -251,6 +252,7 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/social_market$Test__merchandise_tests_MerchandiseViewTestCase_test_get_own_merchandise.coverage" NAME="Test: merchandise.tests.MerchandiseViewTestCase.test_get_own_merchandise Coverage Results" MODIFIED="1707596739353" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/social_market$Test__merchandise_tests_MerchandiseViewTestCase_test_________.coverage" NAME="Test: merchandise.tests.MerchandiseViewTestCase.test_기타_사용자는_사용자가_등록한_상품의_정보를_수정할_수_없다 Coverage Results" MODIFIED="1707602932469" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/social_market$Test__merchandise_tests_MerchandiseViewTestCase_test_update_own_merchandise.coverage" NAME="Test: merchandise.tests.MerchandiseViewTestCase.test_update_own_merchandise Coverage Results" MODIFIED="1707602288682" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/social_market$Test__merchandise_tests_MerchandiseViewTestCase.coverage" NAME="Test: merchandise.tests.MerchandiseViewTestCase Coverage Results" MODIFIED="1707601602290" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/social_market$Test__mail_tests_MailViewTestCase_test______.coverage" NAME="Test: mail.tests.MailViewTestCase.test_사용자가_메일_인증을_통해_계정을_활성화합니다 Coverage Results" MODIFIED="1707473263855" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
