@@ -1,3 +1,5 @@
+from typing import List
+
 from django.db import models
 
 from utils.model.base import AbstractBaseModel
@@ -17,3 +19,12 @@ class Merchandise(AbstractBaseModel):
     @staticmethod
     def create(user_id: int, name: str, description: str, price: int) -> 'Merchandise':
         return Merchandise(user_id=user_id, name=name, description=description, price=price)
+
+    def update(self, update_data) -> List[str]:
+        update_fields = []
+
+        for field_name, value in update_data.items():
+            update_fields.append(field_name)
+            setattr(self, field_name, value)
+
+        return update_fields
