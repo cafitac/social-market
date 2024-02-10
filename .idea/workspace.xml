@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="3caa0b6a-71b9-44f8-a3e7-adb6bbb6aa5b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/merchandise/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/merchandise/admin.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,7 +67,7 @@
       <recent name="$PROJECT_DIR$/mail/models" />
     </key>
   </component>
-  <component name="RunManager" selected="Django tests.Test: merchandise.tests.MerchandiseViewTestCase.test_get_own_merchandise">
+  <component name="RunManager" selected="Django Server.social-market">
     <configuration name="Test: all" type="DjangoTestsConfigurationType">
       <module name="social-market" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -243,7 +243,7 @@
       <workItem from="1707285827737" duration="13731000" />
       <workItem from="1707337141872" duration="7120000" />
       <workItem from="1707369234176" duration="11999000" />
-      <workItem from="1707476438024" duration="6830000" />
+      <workItem from="1707476438024" duration="6917000" />
     </task>
     <servers />
   </component>
