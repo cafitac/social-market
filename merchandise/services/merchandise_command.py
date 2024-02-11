@@ -11,7 +11,7 @@ from merchandise.services import MerchandiseQueryService
 class MerchandiseCommandService:
 
     @staticmethod
-    def create(user_id: int, create_serializer: MerchandiseCreateSerializer) -> MerchandiseSerializer:
+    def create(user_id: int, create_serializer: MerchandiseCreateSerializer) -> int:
         create_serializer.is_valid(raise_exception=True)
         merchandise: Merchandise = Merchandise.create(
             user_id,
@@ -21,10 +21,10 @@ class MerchandiseCommandService:
         )
         merchandise.save()
 
-        return MerchandiseSerializer(merchandise)
+        return merchandise.id
 
     @staticmethod
-    def update(user_id: int, pk: int, update_serializer: MerchandiseUpdateSerializer) -> MerchandiseSerializer:
+    def update(user_id: int, pk: int, update_serializer: MerchandiseUpdateSerializer) -> int:
         update_serializer.is_valid(raise_exception=True)
         merchandise: Merchandise = MerchandiseQueryService.get_merchandise(pk)
         if not merchandise.is_owner(user_id):
@@ -33,7 +33,7 @@ class MerchandiseCommandService:
         update_fields: List[str] = merchandise.update(update_serializer.validated_data)
         merchandise.save(update_fields=update_fields)
 
-        return MerchandiseSerializer(merchandise)
+        return merchandise.id
 
     @staticmethod
     def delete(user_id: int, pk: int):

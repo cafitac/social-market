@@ -14,7 +14,7 @@ class MerchandiseQueryService:
         return MerchandiseSerializer(merchandises, many=True)
 
     @staticmethod
-    def get_merchandise(pk: int):
+    def get_merchandise(pk: int) -> Merchandise:
         try:
             merchandise: Merchandise = Merchandise.objects.get(pk=pk)
         except Merchandise.DoesNotExist:

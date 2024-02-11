@@ -7,6 +7,7 @@
     <list default="true" id="3caa0b6a-71b9-44f8-a3e7-adb6bbb6aa5b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/merchandise/services/merchandise_command.py" beforeDir="false" afterPath="$PROJECT_DIR$/merchandise/services/merchandise_command.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/merchandise/services/merchandise_query.py" beforeDir="false" afterPath="$PROJECT_DIR$/merchandise/services/merchandise_query.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/merchandise/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/merchandise/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -68,7 +69,7 @@
       <recent name="$PROJECT_DIR$/mail/models" />
     </key>
   </component>
-  <component name="RunManager" selected="Django tests.Test: merchandise.tests.MerchandiseViewTestCase.test_기타_사용자는_사용자가_등록한_상품을_삭제할_수_없다">
+  <component name="RunManager" selected="Django tests.Test: merchandise.tests.MerchandiseViewTestCase">
     <configuration name="Test: all" type="DjangoTestsConfigurationType">
       <module name="social-market" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -225,11 +226,11 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Django tests.Test: merchandise.tests.MerchandiseViewTestCase" />
         <item itemvalue="Django tests.Test: merchandise.tests.MerchandiseViewTestCase.test_기타_사용자는_사용자가_등록한_상품을_삭제할_수_없다" />
         <item itemvalue="Django tests.Test: merchandise.tests.MerchandiseViewTestCase.test_사용자가_자신이_등록한_상품을_삭제할_수_있다" />
         <item itemvalue="Django tests.Test: merchandise.tests.MerchandiseViewTestCase.test_기타_사용자는_사용자가_등록한_상품의_정보를_수정할_수_없다" />
         <item itemvalue="Django tests.Test: merchandise.tests.MerchandiseViewTestCase.test_update_own_merchandise" />
-        <item itemvalue="Django tests.Test: merchandise.tests.MerchandiseViewTestCase" />
       </list>
     </recent_temporary>
   </component>
@@ -244,7 +245,7 @@
       <workItem from="1707285827737" duration="13731000" />
       <workItem from="1707337141872" duration="7120000" />
       <workItem from="1707369234176" duration="11999000" />
-      <workItem from="1707476438024" duration="14021000" />
+      <workItem from="1707476438024" duration="14274000" />
     </task>
     <servers />
   </component>
@@ -252,7 +253,7 @@
     <option name="version" value="3" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/social_market$Test__merchandise_tests_MerchandiseViewTestCase.coverage" NAME="Test: merchandise.tests.MerchandiseViewTestCase Coverage Results" MODIFIED="1707601602290" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/social_market$Test__merchandise_tests_MerchandiseViewTestCase.coverage" NAME="Test: merchandise.tests.MerchandiseViewTestCase Coverage Results" MODIFIED="1707633550476" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/social_market$Test__member_tests_UserViewTestCase_test___.coverage" NAME="Test: member.tests.UserViewTestCase.test_사용자가_회원가입을_합니다 Coverage Results" MODIFIED="1707472553000" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/social_market$Test__merchandise_tests_MerchandiseViewTestCase_test_create_merchandise.coverage" NAME="Test: merchandise.tests.MerchandiseViewTestCase.test_create_merchandise Coverage Results" MODIFIED="1707498306241" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/social_market$Test__merchandise_tests_MerchandiseViewTestCase_test_get_own_merchandises.coverage" NAME="Test: merchandise.tests.MerchandiseViewTestCase.test_get_own_merchandises Coverage Results" MODIFIED="1707527106400" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
@@ -260,7 +261,7 @@
     <SUITE FILE_PATH="coverage/social_market$Test__merchandise_tests_MerchandiseViewTestCase_test_________.coverage" NAME="Test: merchandise.tests.MerchandiseViewTestCase.test_기타_사용자는_사용자가_등록한_상품의_정보를_수정할_수_없다 Coverage Results" MODIFIED="1707602932469" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/social_market$Test__merchandise_tests_MerchandiseViewTestCase_test_update_own_merchandise.coverage" NAME="Test: merchandise.tests.MerchandiseViewTestCase.test_update_own_merchandise Coverage Results" MODIFIED="1707602288682" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/social_market$Test__mail_tests_MailViewTestCase_test______.coverage" NAME="Test: mail.tests.MailViewTestCase.test_사용자가_메일_인증을_통해_계정을_활성화합니다 Coverage Results" MODIFIED="1707473263855" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
-    <SUITE FILE_PATH="coverage/social_market$Test__merchandise_tests_MerchandiseViewTestCase_test________.coverage" NAME="Test: merchandise.tests.MerchandiseViewTestCase.test_기타_사용자는_사용자가_등록한_상품을_삭제할_수_없다 Coverage Results" MODIFIED="1707633492391" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/social_market$Test__merchandise_tests_MerchandiseViewTestCase_test________.coverage" NAME="Test: merchandise.tests.MerchandiseViewTestCase.test_기타_사용자는_사용자가_등록한_상품을_삭제할_수_없다 Coverage Results" MODIFIED="1707633508476" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/social_market$Test__member_tests_UserTestCase_test___.coverage" NAME="Test: member.tests.UserTestCase.test_사용자가_회원가입을_합니다 Coverage Results" MODIFIED="1707337321604" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/social_market$Test__domain_mail_tests_MailViewTestCase_test______.coverage" NAME="Test: domain.mail.tests.MailViewTestCase.test_사용자가_메일_인증을_통해_계정을_활성화합니다 Coverage Results" MODIFIED="1707370392377" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/social_market$Test__all.coverage" NAME="Test: all Coverage Results" MODIFIED="1707474231684" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />

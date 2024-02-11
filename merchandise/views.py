@@ -44,7 +44,8 @@ class MerchandiseViewSet(viewsets.GenericViewSet):
     def create(self, request, *args, **kwargs):
         request_user: User = request.user
         create_serializer: MerchandiseCreateSerializer = self.get_serializer(data=request.data)
-        serializer: MerchandiseSerializer = MerchandiseCommandService.create(request_user.id, create_serializer)
+        merchandise_id: int = MerchandiseCommandService.create(request_user.id, create_serializer)
+        serializer: MerchandiseSerializer = MerchandiseQueryService.get_merchandise_response(merchandise_id)
 
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
@@ -56,7 +57,8 @@ class MerchandiseViewSet(viewsets.GenericViewSet):
     def partial_update(self, request, pk=None):
         request_user: User = request.user
         update_serializer: MerchandiseUpdateSerializer = self.get_serializer(data=request.data)
-        serializer: MerchandiseSerializer = MerchandiseCommandService.update(request_user.id, pk, update_serializer)
+        merchandise_id: int = MerchandiseCommandService.update(request_user.id, pk, update_serializer)
+        serializer: MerchandiseSerializer = MerchandiseQueryService.get_merchandise_response(merchandise_id)
 
         return Response(serializer.data, status=status.HTTP_200_OK)
 
