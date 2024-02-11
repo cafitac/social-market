@@ -101,3 +101,15 @@ class MerchandiseViewTestCase(TestCase):
 
         res = self.client.delete(path=f"/api/merchandise/merchandises/{merchandise.id}")
         self.assertEquals(res.status_code, 403)
+
+    def test_기타_사용자가_사용자가_등록한_상품_목록을_조회할_수_있다(self):
+        self.test_사용자가_상품을_등록할_수_있다()
+        self.test_사용자가_상품을_등록할_수_있다()
+        self.client.force_login(self.기타_사용자)
+
+        res = self.client.get(f"/api/merchandise/merchandises?user_id={self.사용자.id}")
+        self.assertEquals(res.status_code, 200)
+
+        data = res.json()
+
+        self.assertEquals(len(data), 2)
