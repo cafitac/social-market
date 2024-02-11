@@ -145,6 +145,22 @@ class MerchandiseViewTestCase(TestCase):
         res = self.client.delete(path=f"/api/merchandise/merchandises/{merchandise.id}")
         self.assertEquals(res.status_code, 403)
 
+    def test_사용자가_상품_이름으로_상품을_검색할_수_있다(self):
+        # given
+        self._사용자가_상품을_등록함(self.사용자)
+        self._사용자가_상품을_등록함(self.기타_사용자)
+        self.client.force_login(self.사용자)
+
+        # when
+        res = self.client.get(path="/api/merchandise/merchandises?q=상품")
+
+        # then
+        self.assertEquals(res.status_code, 200)
+
+        data = res.json()
+        self.assertEquals(len(data), 1)
+        self.assertIn("상품", [x['name'] for x in data])
+
     def _사용자가_상품을_등록함(self, user: User) -> Merchandise:
         self.client.force_login(user)
 
