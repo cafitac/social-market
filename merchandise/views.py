@@ -61,6 +61,7 @@ class MerchandiseViewSet(viewsets.GenericViewSet):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def destroy(self, request, pk=None):
-        MerchandiseCommandService.delete(pk)
+        request_user: User = request.user
+        MerchandiseCommandService.delete(request_user.id, pk)
 
         return Response(status=status.HTTP_204_NO_CONTENT)

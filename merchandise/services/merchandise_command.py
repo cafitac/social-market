@@ -36,6 +36,9 @@ class MerchandiseCommandService:
         return MerchandiseSerializer(merchandise)
 
     @staticmethod
-    def delete(pk: int):
+    def delete(user_id: int, pk: int):
         merchandise: Merchandise = MerchandiseQueryService.get_merchandise(pk)
+        if not merchandise.is_owner(user_id):
+            raise PermissionDenied("상품을 삭제할 수 있는 권한이 없습니다.")
+
         merchandise.delete()
