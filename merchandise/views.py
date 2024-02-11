@@ -1,4 +1,7 @@
+from typing import Optional
+
 from rest_framework import status, viewsets
+from rest_framework.exceptions import ValidationError
 from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
 from rest_framework.response import Response
 
@@ -38,15 +41,13 @@ class MerchandiseViewSet(viewsets.GenericViewSet):
     def list(self, request, *args, **kwargs):
         request_user: User = request.user
 
+        q = request.GET.get("q", None)
         filter_type = request.GET.get("filter_type", None)
-        if filter_type is not None:
-            if filter_type == "own":
-                serializer: MerchandiseSerializer = MerchandiseQueryService.get_merchandises_response_by_user_id(
-                    request_user.id)
-            elif filter_type == 'user':
-                user_id = request.GET.get("user_id", None)
-                serializer: MerchandiseSerializer = MerchandiseQueryService.get_merchandises_response_by_user_id(
-                    user_id)
+        user_id = request.GET.get("user_id", None)
+        if q is not None:
+            serializer: MerchandiseSerializer = self._get_list_by_q(request_user, q)
+        elif filter_type is not None:
+            serializer: MerchandiseSerializer = self._get_list_by_filter_type(request_user, filter_type, user_id)
         else:
             serializer: MerchandiseSerializer = MerchandiseQueryService.get_merchandises_response()
 
@@ -78,3 +79,16 @@ class MerchandiseViewSet(viewsets.GenericViewSet):
         MerchandiseCommandService.delete(request_user.id, pk)
 
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+    @staticmethod
+    def _get_list_by_q(request_user: User, q: str) -> MerchandiseSerializer:
+        return MerchandiseQueryService.get_merchandises_response_by_name(request_user.id, q)
+
+    @staticmethod
+    def _get_list_by_filter_type(request_user: User, filter_type: str, user_id: Optional[int]) -> MerchandiseSerializer:
+        if filter_type == "own":
+            return MerchandiseQueryService.get_merchandises_response_by_user_id(request_user.id)
+        elif filter_type == 'user':
+            if user_id is None:
+                raise ValidationError("올바르지 않은 user_id입니다.")
+            return MerchandiseQueryService.get_merchandises_response_by_user_id(user_id)
