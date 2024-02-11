@@ -85,6 +85,17 @@ class MerchandiseViewTestCase(TestCase):
 
         self.assertEquals(data['name'], merchandise.name)
 
+    def test_사용자가_기타_사용자가_등록한_상품_상세_정보를_조회할_수_있다(self):
+        merchandise: Merchandise = self._사용자가_상품을_등록함(self.사용자)
+        self.client.force_login(self.사용자)
+
+        res = self.client.get(path=f"/api/merchandise/merchandises/{merchandise.id}")
+        self.assertEquals(res.status_code, 200)
+
+        data = res.json()
+
+        self.assertEquals(data['name'], merchandise.name)
+
     def test_사용자가_자신이_등록한_상품의_정보를_수정할_수_있다(self):
         merchandise: Merchandise = self.test_사용자가_상품을_등록할_수_있다()
 
@@ -134,7 +145,7 @@ class MerchandiseViewTestCase(TestCase):
         res = self.client.delete(path=f"/api/merchandise/merchandises/{merchandise.id}")
         self.assertEquals(res.status_code, 403)
 
-    def _사용자가_상품을_등록함(self, user: User) -> None:
+    def _사용자가_상품을_등록함(self, user: User) -> Merchandise:
         self.client.force_login(user)
 
         res = self.client.post(
@@ -147,3 +158,6 @@ class MerchandiseViewTestCase(TestCase):
             content_type="application/json",
         )
         self.assertEquals(res.status_code, 201)
+
+        data = res.json()
+        return Merchandise.objects.get(pk=data["id"])
