@@ -17,9 +17,15 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 
+from django_project.views import index
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+
+    path('', index),
+    path('', include("member.urls")),
+
     path('api/mail/', include("mail.urls")),
-    path('api/member/', include('member.urls')),
+    path('api/member/', include('member.routes')),
     path('api/merchandise/', include('merchandise.urls')),
 ]
