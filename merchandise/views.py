@@ -37,7 +37,18 @@ class MerchandiseViewSet(viewsets.GenericViewSet):
 
     def list(self, request, *args, **kwargs):
         request_user: User = request.user
-        serializer: MerchandiseSerializer = MerchandiseQueryService.get_merchandises_response(request_user.id)
+
+        filter_type = request.GET.get("filter_type", None)
+        if filter_type is not None:
+            if filter_type == "own":
+                serializer: MerchandiseSerializer = MerchandiseQueryService.get_merchandises_response_by_user_id(
+                    request_user.id)
+            elif filter_type == 'user':
+                user_id = request.GET.get("user_id", None)
+                serializer: MerchandiseSerializer = MerchandiseQueryService.get_merchandises_response_by_user_id(
+                    user_id)
+        else:
+            serializer: MerchandiseSerializer = MerchandiseQueryService.get_merchandises_response()
 
         return Response(serializer.data, status=status.HTTP_200_OK)
 

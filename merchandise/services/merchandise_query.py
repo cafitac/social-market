@@ -8,7 +8,13 @@ from merchandise.serializers import MerchandiseSerializer
 class MerchandiseQueryService:
 
     @staticmethod
-    def get_merchandises_response(user_id: int) -> MerchandiseSerializer:
+    def get_merchandises_response() -> MerchandiseSerializer:
+        merchandises: QuerySet[Merchandise] = Merchandise.objects.all()
+
+        return MerchandiseSerializer(merchandises, many=True)
+
+    @staticmethod
+    def get_merchandises_response_by_user_id(user_id: int) -> MerchandiseSerializer:
         merchandises: QuerySet[Merchandise] = Merchandise.objects.filter(user_id=user_id)
 
         return MerchandiseSerializer(merchandises, many=True)
