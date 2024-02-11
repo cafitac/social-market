@@ -33,14 +33,46 @@ class MerchandiseViewTestCase(TestCase):
 
         return Merchandise.objects.get(pk=data['id'])
 
-    def test_사용자가_자신이_등록한_상품_목록을_조회할_수_있다(self):
-        self.test_사용자가_상품을_등록할_수_있다()
+    def test_사용자가_상품_목록을_조회할_수_있다(self):
+        self._사용자가_상품을_등록함(self.사용자)
+        self._사용자가_상품을_등록함(self.사용자)
+        self.client.force_login(self.사용자)
 
         res = self.client.get(path="/api/merchandise/merchandises")
         self.assertEquals(res.status_code, 200)
 
         data = res.json()
 
+        self.assertEquals(len(data), 2)
+
+    def test_사용자가_자신이_등록한_상품_목록만_조회할_수_있다(self):
+        # given
+        self._사용자가_상품을_등록함(self.사용자)
+        self._사용자가_상품을_등록함(self.기타_사용자)
+        self.client.force_login(self.사용자)
+
+        # when
+        res = self.client.get(path="/api/merchandise/merchandises?filter_type=own")
+
+        # then
+        self.assertEquals(res.status_code, 200)
+
+        data = res.json()
+        self.assertEquals(len(data), 1)
+
+    def test_기타_사용자가_사용자가_등록한_상품_목록을_조회할_수_있다(self):
+        # given
+        self._사용자가_상품을_등록함(self.사용자)
+        self._사용자가_상품을_등록함(self.기타_사용자)
+        self.client.force_login(self.기타_사용자)
+
+        # when
+        res = self.client.get(f"/api/merchandise/merchandises?filter_type=user&user_id={self.사용자.id}")
+
+        # then
+        self.assertEquals(res.status_code, 200)
+
+        data = res.json()
         self.assertEquals(len(data), 1)
 
     def test_사용자가_자신이_등록한_상품_상세_정보를_조회할_수_있다(self):
@@ -102,14 +134,16 @@ class MerchandiseViewTestCase(TestCase):
         res = self.client.delete(path=f"/api/merchandise/merchandises/{merchandise.id}")
         self.assertEquals(res.status_code, 403)
 
-    def test_기타_사용자가_사용자가_등록한_상품_목록을_조회할_수_있다(self):
-        self.test_사용자가_상품을_등록할_수_있다()
-        self.test_사용자가_상품을_등록할_수_있다()
-        self.client.force_login(self.기타_사용자)
+    def _사용자가_상품을_등록함(self, user: User) -> None:
+        self.client.force_login(user)
 
-        res = self.client.get(f"/api/merchandise/merchandises?user_id={self.사용자.id}")
-        self.assertEquals(res.status_code, 200)
-
-        data = res.json()
-
-        self.assertEquals(len(data), 2)
+        res = self.client.post(
+            path="/api/merchandise/merchandises",
+            data={
+                "name": "상품",
+                "description": "상품 설명",
+                "price": 10000,
+            },
+            content_type="application/json",
+        )
+        self.assertEquals(res.status_code, 201)
