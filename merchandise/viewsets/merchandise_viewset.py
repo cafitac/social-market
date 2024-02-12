@@ -42,12 +42,12 @@ class MerchandiseViewSet(viewsets.GenericViewSet):
         request_user: User = request.user
 
         q = request.GET.get("q", None)
-        filter_type = request.GET.get("filter_type", None)
-        user_id = request.GET.get("user_id", None)
+        filter_type: str = request.GET.get("filter_type", None)
+        username: str = request.GET.get("username", None)
         if q is not None:
             serializer: MerchandiseSerializer = self._get_list_by_q(request_user, q)
         elif filter_type is not None:
-            serializer: MerchandiseSerializer = self._get_list_by_filter_type(request_user, filter_type, user_id)
+            serializer: MerchandiseSerializer = self._get_list_by_filter_type(request_user, filter_type, username)
         else:
             serializer: MerchandiseSerializer = MerchandiseQueryService.get_merchandises_response()
 
@@ -56,7 +56,7 @@ class MerchandiseViewSet(viewsets.GenericViewSet):
     def create(self, request, *args, **kwargs):
         request_user: User = request.user
         create_serializer: MerchandiseCreateSerializer = self.get_serializer(data=request.data)
-        merchandise_id: int = MerchandiseCommandService.create(request_user.id, create_serializer)
+        merchandise_id: int = MerchandiseCommandService.create(request_user.username, create_serializer)
         serializer: MerchandiseSerializer = MerchandiseQueryService.get_merchandise_response(merchandise_id)
 
         return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -69,26 +69,26 @@ class MerchandiseViewSet(viewsets.GenericViewSet):
     def partial_update(self, request, pk=None):
         request_user: User = request.user
         update_serializer: MerchandiseUpdateSerializer = self.get_serializer(data=request.data)
-        merchandise_id: int = MerchandiseCommandService.update(request_user.id, pk, update_serializer)
+        merchandise_id: int = MerchandiseCommandService.update(request_user.username, pk, update_serializer)
         serializer: MerchandiseSerializer = MerchandiseQueryService.get_merchandise_response(merchandise_id)
 
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def destroy(self, request, pk=None):
         request_user: User = request.user
-        MerchandiseCommandService.delete(request_user.id, pk)
+        MerchandiseCommandService.delete(request_user.username, pk)
 
         return Response(status=status.HTTP_204_NO_CONTENT)
 
     @staticmethod
     def _get_list_by_q(request_user: User, q: str) -> MerchandiseSerializer:
-        return MerchandiseQueryService.get_merchandises_response_by_name(request_user.id, q)
+        return MerchandiseQueryService.get_merchandises_response_by_name(request_user.username, q)
 
     @staticmethod
-    def _get_list_by_filter_type(request_user: User, filter_type: str, user_id: Optional[int]) -> MerchandiseSerializer:
+    def _get_list_by_filter_type(request_user: User, filter_type: str, username: Optional[str]) -> MerchandiseSerializer:
         if filter_type == "own":
-            return MerchandiseQueryService.get_merchandises_response_by_user_id(request_user.id)
+            return MerchandiseQueryService.get_merchandises_response_by_user_id(request_user.username)
         elif filter_type == 'user':
-            if user_id is None:
+            if username is None:
                 raise ValidationError("올바르지 않은 user_id입니다.")
-            return MerchandiseQueryService.get_merchandises_response_by_user_id(user_id)
+            return MerchandiseQueryService.get_merchandises_response_by_user_id(username)

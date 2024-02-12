@@ -67,7 +67,7 @@ class MerchandiseViewTestCase(TestCase):
         self.client.force_login(self.기타_사용자)
 
         # when
-        res = self.client.get(f"/api/merchandise/merchandises?filter_type=user&user_id={self.사용자.id}")
+        res = self.client.get(f"/api/merchandise/merchandises?filter_type=user&username={self.사용자.username}")
 
         # then
         self.assertEquals(res.status_code, 200)

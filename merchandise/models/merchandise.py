@@ -6,7 +6,7 @@ from utils.model.base import AbstractBaseModel
 
 
 class Merchandise(AbstractBaseModel):
-    user_id = models.IntegerField(null=False)
+    username = models.CharField(max_length=150, blank=False, null=False)
     name = models.CharField(max_length=50, blank=False, null=False)
     description = models.TextField(blank=True, null=False)
     price = models.IntegerField(null=False)
@@ -17,11 +17,11 @@ class Merchandise(AbstractBaseModel):
         verbose_name_plural = f"{verbose_name} List"
 
     @staticmethod
-    def create(user_id: int, name: str, description: str, price: int) -> 'Merchandise':
-        return Merchandise(user_id=user_id, name=name, description=description, price=price)
+    def create(username: str, name: str, description: str, price: int) -> 'Merchandise':
+        return Merchandise(username=username, name=name, description=description, price=price)
 
-    def is_owner(self, user_id):
-        return self.user_id == user_id
+    def is_owner(self, username: str):
+        return self.username == username
 
     def update(self, update_data) -> List[str]:
         update_fields = []

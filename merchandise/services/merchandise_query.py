@@ -14,15 +14,15 @@ class MerchandiseQueryService:
         return MerchandiseSerializer(merchandises, many=True)
 
     @staticmethod
-    def get_merchandises_response_by_user_id(user_id: int) -> MerchandiseSerializer:
-        merchandises: QuerySet[Merchandise] = Merchandise.objects.filter(user_id=user_id)
+    def get_merchandises_response_by_user_id(username: str) -> MerchandiseSerializer:
+        merchandises: QuerySet[Merchandise] = Merchandise.objects.filter(username=username)
 
         return MerchandiseSerializer(merchandises, many=True)
 
     @staticmethod
-    def get_merchandises_response_by_name(user_id: int, name: str) -> MerchandiseSerializer:
-        query = Merchandise.objects.filter(~Q(user_id=user_id), name__icontains=name)
-        merchandises: QuerySet[Merchandise] = Merchandise.objects.filter(~Q(user_id=user_id), name__icontains=name)
+    def get_merchandises_response_by_name(username: str, name: str) -> MerchandiseSerializer:
+        query = Merchandise.objects.filter(~Q(username=username), name__icontains=name)
+        merchandises: QuerySet[Merchandise] = Merchandise.objects.filter(~Q(username=username), name__icontains=name)
 
         return MerchandiseSerializer(merchandises, many=True)
 
