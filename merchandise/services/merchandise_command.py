@@ -2,7 +2,7 @@ from typing import List
 
 from rest_framework.exceptions import PermissionDenied
 
-from merchandise.models import Merchandise
+from merchandise.models import Merchandise, Stock
 from merchandise.serializers import MerchandiseCreateSerializer, MerchandiseSerializer
 from merchandise.serializers.merchandise_update_serializer import MerchandiseUpdateSerializer
 from merchandise.services import MerchandiseQueryService
@@ -20,6 +20,9 @@ class MerchandiseCommandService:
             create_serializer.validated_data['price']
         )
         merchandise.save()
+
+        stock: Stock = Stock.create(merchandise=merchandise)
+        stock.save()
 
         return merchandise.id
 
