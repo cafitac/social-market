@@ -16,3 +16,6 @@ class Stock(AbstractBaseModel):
     @staticmethod
     def create(merchandise: Merchandise) -> 'Stock':
         return Stock(merchandise=merchandise)
+
+    def update_count(self, stock_count):
+        self.count = stock_count

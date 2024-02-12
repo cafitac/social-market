@@ -12,6 +12,7 @@ from merchandise.serializers.merchandise_create_serializer import MerchandiseCre
 from merchandise.serializers.merchandise_serializer import MerchandiseSerializer
 from merchandise.serializers.merchandise_update_serializer import MerchandiseUpdateSerializer
 from merchandise.serializers.stock_serializer import StockSerializer
+from merchandise.serializers.stock_update_serializer import StockUpdateSerializer
 from merchandise.services import MerchandiseCommandService, MerchandiseQueryService
 
 
@@ -38,6 +39,9 @@ class MerchandiseViewSet(viewsets.GenericViewSet):
             self.serializer_class = MerchandiseSerializer
         elif self.action == 'partial_update':
             self.serializer_class = MerchandiseUpdateSerializer
+        elif self.action == 'stock':
+            if self.request.method == 'PATCH':
+                self.serializer_class = StockUpdateSerializer
 
         return super().get_serializer(*args, **kwargs)
 
@@ -83,10 +87,16 @@ class MerchandiseViewSet(viewsets.GenericViewSet):
 
         return Response(status=status.HTTP_204_NO_CONTENT)
 
-    @action(detail=True, methods=['get'], url_path="stock")
+    @action(detail=True, methods=['get', 'patch'], url_path="stock")
     def stock(self, request, pk=None):
-        serializer: StockSerializer = MerchandiseQueryService.get_stock_response(pk)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        if request.method == 'GET':
+            serializer: StockSerializer = MerchandiseQueryService.get_stock_response(pk)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        elif request.method == 'PATCH':
+            update_serializer: StockUpdateSerializer = self.get_serializer(data=request.data)
+            merchandise_id: int = MerchandiseCommandService.update_stock(pk, update_serializer)
+            serializer: StockSerializer = MerchandiseQueryService.get_stock_response(merchandise_id)
+            return Response(serializer.data, status=status.HTTP_200_OK)
 
     @staticmethod
     def _get_list_by_q(request_user: User, q: str) -> MerchandiseSerializer:
