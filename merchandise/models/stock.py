@@ -5,10 +5,14 @@ from utils.model.base import AbstractBaseModel
 
 
 class Stock(AbstractBaseModel):
-    merchandise = models.ForeignKey(to=Merchandise, on_delete=models.CASCADE, null=False)
+    merchandise = models.OneToOneField(to=Merchandise, on_delete=models.CASCADE, null=False)
     count = models.IntegerField(default=0)
 
     class Meta:
         db_table = 'stock'
         verbose_name = 'Stock'
         verbose_name_plural = f'{verbose_name} List'
+
+    @staticmethod
+    def create(merchandise: Merchandise) -> 'Stock':
+        return Stock(merchandise=merchandise)
