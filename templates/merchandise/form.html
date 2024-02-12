@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="mb-3">
+        <label for="name" class="form-label">이름</label>
+        <input type="text" class="form-control" id="name" placeholder="상품 이름을 입력해주세요." required>
+    </div>
+    <div class="mb-3">
+        <label for="description" class="form-label">설명</label>
+        <textarea class="form-control" id="description" placeholder="상품 설명을 입력해주세요." required></textarea>
+    </div>
+    <div class="mb-3">
+        <label for="price" class="form-label">가격</label>
+        <input type="text" class="form-control" id="price" placeholder="상품 가격을 입력해주세요." required>
+    </div>
+
+    <div class="d-flex flex-row-reverse p-2">
+        <button type="button" class="btn btn-primary" onclick="register()">상품 등록</button>
+    </div>
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'js/merchandise/register.js' %}"></script>
+{% endblock %}

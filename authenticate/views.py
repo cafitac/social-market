@@ -5,9 +5,8 @@ from django.http import JsonResponse
 from django.shortcuts import redirect, render
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
-from rest_framework import status
+from rest_framework.authtoken.models import Token
 
-from django_project.views import index
 from member.models import User
 
 
@@ -17,10 +16,13 @@ def session_login(request):
     data = json.loads(request.body)
     user: User = authenticate(username=data['username'], password=data['password'])
     if user.check_password(data['password']) and user.is_active:
+        token, _ = Token.objects.get_or_create(user=user)
         request.session.set_expiry(86400)
         login(request, user)
+    else:
+        JsonResponse({'message': '올바르지 않은 사용자 정보입니다.'}, status=401)
 
-    return redirect(index)
+    return JsonResponse({'token': token.key}, status=200)
 
 
 def login_form(request):

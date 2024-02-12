@@ -1,1 +1,7 @@
 {% extends 'base.html' %}
+
+{% block content %}
+    {% for merchandise in merchadises %}
+        <p>{{ merchandise.name }}</p>
+    {% endfor %}
+{% endblock %}
