@@ -7,7 +7,7 @@ from merchandise.models import Merchandise
 
 @login_required
 def my_merchandises(request):
-    merchandises: QuerySet[Merchandise] = Merchandise.objects.filter(user_id=request.user.id)
+    merchandises: QuerySet[Merchandise] = Merchandise.objects.filter(username=request.user.username)
 
     return render(request, 'merchandise/list.html', {
         'merchandises': merchandises,
