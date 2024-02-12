@@ -22,8 +22,8 @@ from django_project.views import index
 urlpatterns = [
     path('admin/', admin.site.urls),
 
-    path('', index),
-    path('', include("member.urls")),
+    path('', index, name='index'),
+    path('', include("authenticate.urls")),
 
     path('api/auth/', include('authenticate.routes')),
     path('api/mail/', include("mail.routes")),

@@ -17,7 +17,7 @@ class LoginViewTestCase(TestCase):
     def test_사용자가_로그인을_할_수_있다(self):
         # when
         res = self.client.post(
-            path="/api/auth/login",
+            path="/api/auth/token",
             data={
                 "username": self.사용자.username,
                 "password": self.raw_password,

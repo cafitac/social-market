@@ -1,5 +1,6 @@
 {% include "base.html" %}
 
+{#{% load static %}#}
 {% block title %}{% endblock %}
 
 {% block content %}
@@ -19,5 +20,5 @@
 
 {% load static %}
 {% block script %}
-    <script src="{% static 'js/member/login.js' %}"></script>
+    <script src="{% static 'js/auth/login.js' %}"></script>
 {% endblock %}
