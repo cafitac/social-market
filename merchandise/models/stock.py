@@ -1,10 +1,11 @@
 from django.db import models
 
+from merchandise.models import Merchandise
 from utils.model.base import AbstractBaseModel
 
 
 class Stock(AbstractBaseModel):
-    merchandise_id = models.IntegerField(null=False)
+    merchandise = models.ForeignKey(to=Merchandise, on_delete=models.CASCADE, null=False)
     count = models.IntegerField(default=0)
 
     class Meta:
