@@ -11,7 +11,7 @@ from merchandise.services import MerchandiseQueryService
 class MerchandiseCommandService:
 
     @staticmethod
-    def create(username: str, create_serializer: MerchandiseCreateSerializer) -> int:
+    def create(username: str, create_serializer: MerchandiseCreateSerializer) -> Merchandise:
         create_serializer.is_valid(raise_exception=True)
         merchandise: Merchandise = Merchandise.create(
             username,
@@ -21,10 +21,7 @@ class MerchandiseCommandService:
         )
         merchandise.save()
 
-        stock: Stock = Stock.create(merchandise=merchandise)
-        stock.save()
-
-        return merchandise.id
+        return merchandise
 
     @staticmethod
     def update(username: str, pk: int, update_serializer: MerchandiseUpdateSerializer) -> int:

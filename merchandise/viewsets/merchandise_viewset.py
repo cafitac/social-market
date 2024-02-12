@@ -10,6 +10,7 @@ from merchandise.models import Merchandise
 from merchandise.serializers import MerchandiseCreateSerializer, MerchandiseSerializer
 from merchandise.serializers.merchandise_update_serializer import MerchandiseUpdateSerializer
 from merchandise.services import MerchandiseCommandService, MerchandiseQueryService
+from usecase.create_merchandise import CreateMerchandiseUseCase
 
 
 class MerchandiseViewSet(viewsets.GenericViewSet):
@@ -56,7 +57,7 @@ class MerchandiseViewSet(viewsets.GenericViewSet):
     def create(self, request, *args, **kwargs):
         request_user: User = request.user
         create_serializer: MerchandiseCreateSerializer = self.get_serializer(data=request.data)
-        merchandise_id: int = MerchandiseCommandService.create(request_user.username, create_serializer)
+        merchandise_id: int = CreateMerchandiseUseCase.execute(request_user.username, create_serializer)
         serializer: MerchandiseSerializer = MerchandiseQueryService.get_merchandise_response(merchandise_id)
 
         return Response(serializer.data, status=status.HTTP_201_CREATED)
