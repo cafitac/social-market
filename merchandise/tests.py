@@ -160,6 +160,55 @@ class MerchandiseViewTestCase(TestCase):
         data = res.json()
         self.assertEquals(len(data), 1)
         self.assertIn("상품", [x['name'] for x in data])
+        
+    def test_사용자가_상품_재고를_조회할_수_있다(self):
+        # given
+        merchandise: Merchandise = self._사용자가_상품을_등록함(self.사용자)
+
+        # when
+        res = self.client.get(path=f"/api/merchandise/merchandises/{merchandise.id}/stock")
+    
+        # then
+        self.assertEquals(res.status_code, 200)
+
+        data = res.json()
+        self.assertEquals(data['stock'], 0)
+
+    def test_사용자가_상품_재고를_수정할_수_있다(self):
+        # given
+        merchandise: Merchandise = self._사용자가_상품을_등록함(self.사용자)
+
+        # when
+        res = self.client.patch(
+            path=f"/api/merchandise/merchandises/{merchandise.id}/stock",
+            data={
+                'count': 10
+            },
+            content_type="application/json",
+        )
+
+        # then
+        self.assertEquals(res.status_code, 200)
+
+        merchandise.refresh_from_db()
+        self.assertEquals(merchandise.stock.count, 10)
+
+    def test_기타_사용자는_사용자가_등록한_상품의_재고를_수정할_수_없다(self):
+        # given
+        merchandise: Merchandise = self._사용자가_상품을_등록함(self.사용자)
+        self.client.force_login(self.기타_사용자)
+
+        # when
+        res = self.client.patch(
+            path=f"/api/merchandise/merchandises/{merchandise.id}/stock",
+            data={
+                'count': 10
+            },
+            content_type="application/json",
+        )
+
+        # then
+        self.assertEquals(res.status_code, 403)
 
     def _사용자가_상품을_등록함(self, user: User) -> Merchandise:
         self.client.force_login(user)
