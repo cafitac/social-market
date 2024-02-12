@@ -1,3 +1,3 @@
-from .merchandise_query import *
-from .merchandise_command import *
-from .stock_command_service import *
+from .merchandise_query import MerchandiseQueryService
+from .merchandise_command import MerchandiseCommandService
+from .stock_command_service import StockCommandService

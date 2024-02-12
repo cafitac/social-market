@@ -2,16 +2,17 @@ from typing import List
 
 from rest_framework.exceptions import PermissionDenied
 
-from merchandise.models import Merchandise, Stock
-from merchandise.serializers import MerchandiseCreateSerializer, MerchandiseSerializer
+from merchandise.models import Merchandise
+from merchandise.serializers.merchandise_create_serializer import MerchandiseCreateSerializer
 from merchandise.serializers.merchandise_update_serializer import MerchandiseUpdateSerializer
-from merchandise.services import MerchandiseQueryService
+from merchandise.services.stock_command_service import StockCommandService
+from merchandise.services.merchandise_query import MerchandiseQueryService
 
 
 class MerchandiseCommandService:
 
     @staticmethod
-    def create(username: str, create_serializer: MerchandiseCreateSerializer) -> Merchandise:
+    def create(username: str, create_serializer: MerchandiseCreateSerializer) -> int:
         create_serializer.is_valid(raise_exception=True)
         merchandise: Merchandise = Merchandise.create(
             username,
@@ -21,7 +22,9 @@ class MerchandiseCommandService:
         )
         merchandise.save()
 
-        return merchandise
+        StockCommandService.create(merchandise)
+
+        return merchandise.id
 
     @staticmethod
     def update(username: str, pk: int, update_serializer: MerchandiseUpdateSerializer) -> int:

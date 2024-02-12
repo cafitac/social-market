@@ -1,16 +1,18 @@
 from typing import Optional
 
 from rest_framework import status, viewsets
+from rest_framework.decorators import action
 from rest_framework.exceptions import ValidationError
 from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
 from rest_framework.response import Response
 
 from member.models import User
 from merchandise.models import Merchandise
-from merchandise.serializers import MerchandiseCreateSerializer, MerchandiseSerializer
+from merchandise.serializers.merchandise_create_serializer import MerchandiseCreateSerializer
+from merchandise.serializers.merchandise_serializer import MerchandiseSerializer
 from merchandise.serializers.merchandise_update_serializer import MerchandiseUpdateSerializer
+from merchandise.serializers.stock_serializer import StockSerializer
 from merchandise.services import MerchandiseCommandService, MerchandiseQueryService
-from usecase.create_merchandise import CreateMerchandiseUseCase
 
 
 class MerchandiseViewSet(viewsets.GenericViewSet):
@@ -57,7 +59,7 @@ class MerchandiseViewSet(viewsets.GenericViewSet):
     def create(self, request, *args, **kwargs):
         request_user: User = request.user
         create_serializer: MerchandiseCreateSerializer = self.get_serializer(data=request.data)
-        merchandise_id: int = CreateMerchandiseUseCase.execute(request_user.username, create_serializer)
+        merchandise_id: int = MerchandiseCommandService.create(request_user.username, create_serializer)
         serializer: MerchandiseSerializer = MerchandiseQueryService.get_merchandise_response(merchandise_id)
 
         return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -80,6 +82,11 @@ class MerchandiseViewSet(viewsets.GenericViewSet):
         MerchandiseCommandService.delete(request_user.username, pk)
 
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+    @action(detail=True, methods=['get'], url_path="stock")
+    def stock(self, request, pk=None):
+        serializer: StockSerializer = MerchandiseQueryService.get_stock_response(pk)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
     @staticmethod
     def _get_list_by_q(request_user: User, q: str) -> MerchandiseSerializer:

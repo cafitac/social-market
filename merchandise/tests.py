@@ -172,7 +172,7 @@ class MerchandiseViewTestCase(TestCase):
         self.assertEquals(res.status_code, 200)
 
         data = res.json()
-        self.assertEquals(data['stock'], 0)
+        self.assertEquals(data['count'], 0)
 
     def test_사용자가_상품_재고를_수정할_수_있다(self):
         # given
