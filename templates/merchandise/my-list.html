@@ -17,9 +17,10 @@
                         <p class="card-text">{{ merchandise.description }}</p>
                         <p class="card-text">가격 : {{ merchandise.price }}원</p>
                         <p class="card-text">등록자 : {{ merchandise.username }}</p>
-                        <p class="card-text">재고 : {{ merchandise.stock.count }}원</p>
+                        <p class="card-text">재고 : {{ merchandise.stock.count }}</p>
                         <button type="button"
                                 class="btn btn-primary updateButton"
+                                data-id="{{ merchandise.id }}"
                                 data-name="{{ merchandise.name }}"
                                 data-description="{{ merchandise.description }}"
                                 data-price="{{ merchandise.price }}"
@@ -41,6 +42,40 @@
         {% endfor %}
     </div>
 
+    <!--UpdateModal-->
+    <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="updateModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="updateModalLabel">상품 정보 수정</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <span id="update-merchandise-id" hidden="hidden"></span>
+
+                    <label for="name" class="form-label">이름</label>
+                    <span id="previousName" hidden="hidden"></span>
+                    <input id="updateName" type="text" class="form-control" required>
+                    <label for="description" class="form-label">설명</label>
+                    <span id="previousDescription" hidden="hidden"></span>
+                    <textarea id="updateDescription" class="form-control"></textarea>
+                    <label for="price" class="form-label">가격</label>
+                    <span id="previousPrice" hidden="hidden"></span>
+                    <input id="updatePrice" type="text" class="form-control" required>
+                    <label for="stock" class="form-label">재고</label>
+                    <span id="previousStock" hidden="hidden"></span>
+                    <input id="updateStock" type="text" class="form-control" required>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                    <button id="updateConfirm" type="button" class="btn btn-primary">수정</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--DeleteConfirmModal-->
     <div class="modal fade" id="deleteConfirmModal" tabindex="-1" aria-labelledby="deleteConfirmModalLabel"
          aria-hidden="true">
         <div class="modal-dialog">
@@ -48,9 +83,6 @@
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="deleteConfirmModalLabel">정말 삭제하시겠습니까?</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    ...
                 </div>
                 <div class="modal-footer">
                     <span id="delete-merchandise-id" hidden="hidden"></span>
@@ -63,5 +95,6 @@
 {% endblock %}
 
 {% block script %}
+    <script src="{% static 'js/merchandise/update.js' %}"></script>
     <script src="{% static 'js/merchandise/delete.js' %}"></script>
 {% endblock %}
