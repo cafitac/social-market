@@ -89,12 +89,13 @@ class MerchandiseViewSet(viewsets.GenericViewSet):
 
     @action(detail=True, methods=['get', 'patch'], url_path="stock")
     def stock(self, request, pk=None):
+        request_user: User = request.user
         if request.method == 'GET':
             serializer: StockSerializer = MerchandiseQueryService.get_stock_response(pk)
             return Response(serializer.data, status=status.HTTP_200_OK)
         elif request.method == 'PATCH':
             update_serializer: StockUpdateSerializer = self.get_serializer(data=request.data)
-            merchandise_id: int = MerchandiseCommandService.update_stock(pk, update_serializer)
+            merchandise_id: int = MerchandiseCommandService.update_stock(request_user.username, pk, update_serializer)
             serializer: StockSerializer = MerchandiseQueryService.get_stock_response(merchandise_id)
             return Response(serializer.data, status=status.HTTP_200_OK)
 

@@ -49,9 +49,12 @@ class MerchandiseCommandService:
         merchandise.delete()
 
     @staticmethod
-    def update_stock(merchandise_id: int, update_serializer: StockUpdateSerializer) -> int:
+    def update_stock(username, merchandise_id: int, update_serializer: StockUpdateSerializer) -> int:
         update_serializer.is_valid(raise_exception=True)
         merchandise: Merchandise = MerchandiseQueryService.get_merchandise(merchandise_id)
+        if not merchandise.is_owner(username):
+            raise PermissionDenied("상품 재고를 수정할 수 있는 권한이 없습니다.")
+
         merchandise.stock.update_count(update_serializer.validated_data['count'])
 
         merchandise.stock.save(update_fields=['count'])
