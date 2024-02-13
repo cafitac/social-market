@@ -1,7 +1,7 @@
 from django.db import transaction
 
 from mail.services.mail_command_service import MailCommandService
-from member.services import UserCommandService
+from member.services.user_command_service import UserCommandService
 
 
 class ActivateUserUseCase:
