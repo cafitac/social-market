@@ -14,8 +14,11 @@ class CreditViewTestCase(TestCase):
         self.크레딧.save()
 
     def test_사용자는_크레딧을_조회할_수_있다(self):
+        # given
+        self.client.force_login(self.사용자)
+
         # when
-        res = self.client.get(path="/api/member/members/credit")
+        res = self.client.get(path="/api/member/users/credit")
 
         # then
         self.assertEquals(res.status_code, 200)
@@ -24,9 +27,12 @@ class CreditViewTestCase(TestCase):
         self.assertEquals(data['balance'], 0)
 
     def test_사용자는_결제에_필요한_크레딧을_충전할_수_있다(self):
+        # given
+        self.client.force_login(self.사용자)
+
         # when
         res = self.client.post(
-            path="/api/member/members/credit",
+            path="/api/member/users/credit",
             data={
                 "balance": 10000,
             },
