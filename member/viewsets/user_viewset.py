@@ -6,6 +6,8 @@ from rest_framework.response import Response
 from member.models import User
 from member.serializers import UserCreateSerializer, UserSerializer
 from member.serializers.credit_serializer import CreditSerializer
+from member.serializers.update_credit_serializer import UpdateCreditSerializer
+from member.services.user_command_service import UserCommandService
 from member.services.user_query_service import UserQueryService
 from usecase.user_register import UserRegisterUseCase
 
@@ -22,6 +24,9 @@ class UserViewSet(viewsets.GenericViewSet):
     def get_serializer(self, *args, **kwargs):
         if self.action == 'create':
             self.serializer_class = UserCreateSerializer
+        elif self.action == 'credit':
+            if self.request.method == 'POST':
+                self.serializer_class = UpdateCreditSerializer
 
         return super().get_serializer(*args, **kwargs)
 
@@ -31,9 +36,16 @@ class UserViewSet(viewsets.GenericViewSet):
 
         return Response(data=serializer.data, status=status.HTTP_201_CREATED)
 
-    @action(detail=False, methods=['GET'], url_path="credit")
+    @action(detail=False, methods=['get', 'post'], url_path="credit")
     def credit(self, request):
         request_user: User = request.user
-        serializer: CreditSerializer = UserQueryService.get_credit(request_user.id)
+        if request.method == 'GET':
+            serializer: CreditSerializer = UserQueryService.get_credit_response(request_user.id)
 
-        return Response(serializer.data, status=status.HTTP_200_OK)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        elif request.method == 'POST':
+            update_serializer: UpdateCreditSerializer = self.get_serializer(data=request.data)
+            user_id: int = UserCommandService.charge_credit(request_user.id, update_serializer)
+            serializer: CreditSerializer = UserQueryService.get_credit_response(user_id)
+
+            return Response(serializer.data, status=status.HTTP_200_OK)

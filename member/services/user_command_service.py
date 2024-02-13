@@ -1,7 +1,9 @@
 from rest_framework.exceptions import ValidationError
 
-from member.models import User
+from member.models import Credit, User
 from member.serializers import UserCreateSerializer, UserSerializer
+from member.serializers.update_credit_serializer import UpdateCreditSerializer
+from member.services.user_query_service import UserQueryService
 
 
 class UserCommandService:
@@ -26,6 +28,16 @@ class UserCommandService:
 
         user.is_active = True
         user.save()
+
+    @classmethod
+    def charge_credit(cls, user_id: int, update_serializer: UpdateCreditSerializer) -> int:
+        update_serializer.is_valid(raise_exception=True)
+
+        credit: Credit = UserQueryService.get_credit(user_id)
+        credit.charge(update_serializer.validated_data['charge_amount'])
+        credit.save()
+
+        return user_id
 
     def _check_before_save_user(self, serializer: UserCreateSerializer):
         self._check_username_is_exists(serializer.validated_data['username'])
