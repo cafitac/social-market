@@ -34,7 +34,7 @@ class CreditViewTestCase(TestCase):
         res = self.client.post(
             path="/api/member/users/credit",
             data={
-                "balance": 10000,
+                "charge_amount": 10000,
             },
             content_type="application/json",
         )
