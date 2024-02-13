@@ -6,7 +6,7 @@ from merchandise.models import Merchandise
 
 def index(request):
     q: str = request.GET.get('q')
-    merchandises: QuerySet[Merchandise] = Merchandise.objects.all()
+    merchandises: QuerySet[Merchandise] = Merchandise.objects.filter(is_deleted=False)
     if q is not None:
         merchandises = merchandises.filter(name__icontains=q)
 

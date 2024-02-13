@@ -10,7 +10,7 @@ class MerchandiseQueryService:
 
     @staticmethod
     def get_merchandises_response() -> MerchandiseSerializer:
-        merchandises: QuerySet[Merchandise] = Merchandise.objects.all().values("id", "name", "description", "price")
+        merchandises: QuerySet[Merchandise] = Merchandise.objects.filter(is_deleted=False).values("id", "name", "description", "price")
 
         return MerchandiseSerializer(merchandises, many=True)
 

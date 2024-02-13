@@ -10,6 +10,7 @@ class Merchandise(AbstractBaseModel):
     name = models.CharField(max_length=50, blank=False, null=False)
     description = models.TextField(blank=True, null=False)
     price = models.IntegerField(null=False)
+    is_deleted = models.BooleanField(default=False)
 
     class Meta:
         db_table = 'merchandise'
@@ -31,3 +32,6 @@ class Merchandise(AbstractBaseModel):
             setattr(self, field_name, value)
 
         return update_fields
+
+    def delete(self, using=None, keep_parents=False):
+        self.is_deleted = True

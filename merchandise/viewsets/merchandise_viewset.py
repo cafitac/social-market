@@ -17,7 +17,7 @@ from merchandise.services import MerchandiseCommandService, MerchandiseQueryServ
 
 
 class MerchandiseViewSet(viewsets.GenericViewSet):
-    queryset = Merchandise.objects.all()[:10]
+    queryset = Merchandise.objects.filter(is_deleted=False)[:10]
     lookup_field = "pk"
 
     def get_permissions(self):

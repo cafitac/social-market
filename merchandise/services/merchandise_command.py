@@ -47,6 +47,7 @@ class MerchandiseCommandService:
             raise PermissionDenied("상품을 삭제할 수 있는 권한이 없습니다.")
 
         merchandise.delete()
+        merchandise.save()
 
     @staticmethod
     def update_stock(username, merchandise_id: int, update_serializer: StockUpdateSerializer) -> int:
