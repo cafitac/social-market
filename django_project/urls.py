@@ -24,6 +24,7 @@ urlpatterns = [
 
     path('', index, name='index'),
     path('', include("authenticate.urls")),
+    path('', include("member.urls")),
     path('', include("merchandise.urls")),
 
     path('api/auth/', include('authenticate.routes')),

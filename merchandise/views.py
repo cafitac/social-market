@@ -9,7 +9,7 @@ from merchandise.models import Merchandise
 def my_merchandises(request):
     merchandises: QuerySet[Merchandise] = Merchandise.objects.filter(username=request.user.username)
 
-    return render(request, 'merchandise/list.html', {
+    return render(request, 'merchandise/my-list.html', {
         'merchandises': merchandises,
     })
 
