@@ -17,6 +17,9 @@ class UserCommandService:
                                  serializer.validated_data['email'])
         user.save()
 
+        credit: Credit = Credit.create(user)
+        credit.save()
+
         return UserSerializer(user)
 
     @staticmethod
