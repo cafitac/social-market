@@ -25,10 +25,16 @@ class CartViewSet(viewsets.GenericViewSet):
 
         return super().get_serializer(*args, **kwargs)
 
+    def list(self, request):
+        request_user: User = request.user
+        serializer: CartSerializer = CartQueryService.get_carts_response(request_user.id)
+
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
     def create(self, request):
         request_user: User = request.user
         create_serializer: CartCreateSerializer = self.get_serializer(data=request.data)
         cart_id: int = CartCommandService.create_cart(request_user.id, create_serializer)
-        serializer: CartSerializer = CartQueryService.get_cart(cart_id)
+        serializer: CartSerializer = CartQueryService.get_cart_response(cart_id)
 
         return Response(serializer.data, status=status.HTTP_201_CREATED)
