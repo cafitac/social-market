@@ -17,6 +17,7 @@ class CartCommandService:
             merchandise_name=merchandise.name,
             merchandise_price=merchandise.price,
             merchandise_is_deleted=merchandise.is_deleted,
+            amount=create_serializer.validated_data['amount'],
         )
         cart.save()
         return cart.id
