@@ -17,6 +17,8 @@ class CartViewTestCase(TestCase):
         self.상품_2: Merchandise = fixture.merchandise_2
         self.상품_2.save()
 
+        self.client.force_login(self.사용자)
+
     def test_사용자가_상품을_장바구니에_추가할_수_있다(self):
         # when
         res = self.client.post(
