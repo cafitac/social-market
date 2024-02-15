@@ -9,6 +9,7 @@ class Cart(AbstractBaseModel):
     merchandise_name = models.CharField(max_length=150, blank=False, null=False)
     merchandise_price = models.IntegerField(null=False)
     merchandise_is_deleted = models.BooleanField(default=False)
+    amount = models.IntegerField(null=False)
     is_deleted = models.BooleanField(default=False)
 
     class Meta:
