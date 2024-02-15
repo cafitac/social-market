@@ -67,7 +67,7 @@ class CartViewTestCase(TestCase):
 
     def _사용자가_장바구니에_상품을_추가함(self, merchandise_id: int) -> Cart:
         res = self.client.post(
-            path="/api/cart/carts/",
+            path="/api/cart/carts",
             data={
                 "merchandise_id": merchandise_id,
             },
