@@ -12,15 +12,17 @@ class CartViewTestCase(TestCase):
         fixture = TestFixture()
         self.사용자: User = fixture.active_user
         self.사용자.save()
-        self.상품: Merchandise = fixture.merchandise
-        self.상품.save()
+        self.상품_1: Merchandise = fixture.merchandise_1
+        self.상품_1.save()
+        self.상품_2: Merchandise = fixture.merchandise_2
+        self.상품_2.save()
 
     def test_사용자가_상품을_장바구니에_추가할_수_있다(self):
         # when
         res = self.client.post(
-            path="/api/cart/carts/",
+            path="/api/cart/carts",
             data={
-                "merchandise_id": self.상품.id,
+                "merchandise_id": self.상품_1.id,
             },
             content_type="application/json",
         )
@@ -29,15 +31,21 @@ class CartViewTestCase(TestCase):
         self.assertEquals(res.status_code, 201)
 
         data = res.json()
-        self.assertEquals(data['merchandise_id'], self.상품.id)
+        self.assertEquals(data['merchandise_id'], self.상품_1.id)
 
     def test_사용자가_장바구니의_상품들을_조회할_수_있다(self):
         # given
-        self._사용자가_장바구니에_상품을_추가함(self.상품.id)
-        
+        self._사용자가_장바구니에_상품을_추가함(self.상품_1.id)
+        self._사용자가_장바구니에_상품을_추가함(self.상품_2.id)
+
         # when
+        res = self.client.get("/api/cart/carts")
     
         # then
+        self.assertEquals(res.status_code, 200)
+
+        data = res.json()
+        self.assertEquals(len(data), 2)
 
     def test_사용자가_장바구니에_있는_상품의_수를_수정할_수_있다(self):
         pass

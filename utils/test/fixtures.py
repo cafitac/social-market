@@ -1,6 +1,7 @@
 from mail.models import UserActiveMail
 from member.models import User
 from member.models.credit import Credit
+from merchandise.models import Merchandise
 
 
 class TestFixture:
@@ -16,3 +17,7 @@ class TestFixture:
 
         # Mail
         self.active_mail = UserActiveMail(id=1, user_id=self.non_active_user.id, active_code="active_code")
+
+        # Merchandise
+        self.merchandise_1 = Merchandise(id=1, username=self.active_user.username, name="상품1", price=10000)
+        self.merchandise_2 = Merchandise(id=2, username=self.active_user.username, name="상품2", price=20000)
