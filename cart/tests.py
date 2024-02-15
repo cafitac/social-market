@@ -25,6 +25,7 @@ class CartViewTestCase(TestCase):
             path="/api/cart/carts",
             data={
                 "merchandise_id": self.상품_1.id,
+                "amount": 1,
             },
             content_type="application/json",
         )
@@ -81,6 +82,7 @@ class CartViewTestCase(TestCase):
             path="/api/cart/carts",
             data={
                 "merchandise_id": merchandise_id,
+                "amount": 1,
             },
             content_type="application/json",
         )
