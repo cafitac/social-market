@@ -50,13 +50,24 @@ class CartViewTestCase(TestCase):
         self.assertEquals(len(data), 2)
 
     def test_사용자가_장바구니에_있는_상품의_수를_수정할_수_있다(self):
-        pass
         # given
-        
+        cart: Cart = self._사용자가_장바구니에_상품을_추가함(self.상품_1.id)
+
         # when
-    
+        res = self.client.patch(
+            path=f"/api/cart/carts/{cart.id}",
+            data={
+                "amount": 3,
+            },
+            content_type="application/json",
+        )
+
         # then
-    
+        self.assertEquals(res.status_code, 200)
+
+        cart.refresh_from_db()
+        self.assertEquals(cart.amount, 3)
+
     def test_사용자가_장바구니에_있는_상품을_제거할_수_있다(self):
         pass
         # given
