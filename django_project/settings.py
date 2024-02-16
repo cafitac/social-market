@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'mail',
     'member',
     'merchandise',
+    'order',
 ]
 
 MIDDLEWARE = [
