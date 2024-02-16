@@ -39,3 +39,6 @@ class Cart(AbstractBaseModel):
             setattr(self, field_name, value)
 
         return update_fields
+
+    def delete(self, using=None, keep_parents=False):
+        self.is_deleted = True

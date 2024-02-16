@@ -79,7 +79,8 @@ class CartViewTestCase(TestCase):
         # then
         self.assertEquals(res.status_code, 204)
 
-        self.assertFalse(Cart.objects.filter(pk=cart.id).exists())
+        cart.refresh_from_db()
+        self.assertTrue(cart.is_deleted)
 
     def _사용자가_장바구니에_상품을_추가함(self, merchandise_id: int) -> Cart:
         res = self.client.post(

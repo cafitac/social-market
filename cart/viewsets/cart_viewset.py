@@ -49,3 +49,8 @@ class CartViewSet(viewsets.GenericViewSet):
         serializer: CartSerializer = CartQueryService.get_cart_response(cart_id)
 
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+    def destroy(self, request, pk=None):
+        CartCommandService.delete_cart(pk)
+
+        return Response(status=status.HTTP_204_NO_CONTENT)

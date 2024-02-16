@@ -34,3 +34,9 @@ class CartCommandService:
         cart.save(update_fields=update_fields)
 
         return cart.id
+
+    @classmethod
+    def delete_cart(cls, cart_id: int) -> None:
+        cart: Cart = CartQueryService.get_cart(cart_id)
+        cart.delete()
+        cart.save(update_fields=["is_deleted"])
