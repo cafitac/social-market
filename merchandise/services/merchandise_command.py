@@ -41,13 +41,15 @@ class MerchandiseCommandService:
         return merchandise.id
 
     @staticmethod
-    def delete(username: str, pk: int):
+    def delete(username: str, pk: int) -> int:
         merchandise: Merchandise = MerchandiseQueryService.get_merchandise(pk)
         if not merchandise.is_owner(username):
             raise PermissionDenied("상품을 삭제할 수 있는 권한이 없습니다.")
 
         merchandise.delete()
         merchandise.save()
+
+        return merchandise.id
 
     @staticmethod
     def update_stock(username, merchandise_id: int, update_serializer: StockUpdateSerializer) -> int:

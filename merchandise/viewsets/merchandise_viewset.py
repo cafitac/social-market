@@ -14,6 +14,7 @@ from merchandise.serializers.merchandise_update_serializer import MerchandiseUpd
 from merchandise.serializers.stock_serializer import StockSerializer
 from merchandise.serializers.stock_update_serializer import StockUpdateSerializer
 from merchandise.services import MerchandiseCommandService, MerchandiseQueryService
+from usecase.delete_merchandise import DeleteMerchandiseUseCase
 
 
 class MerchandiseViewSet(viewsets.GenericViewSet):
@@ -83,7 +84,7 @@ class MerchandiseViewSet(viewsets.GenericViewSet):
 
     def destroy(self, request, pk=None):
         request_user: User = request.user
-        MerchandiseCommandService.delete(request_user.username, pk)
+        DeleteMerchandiseUseCase.execute(request_user.username, pk)
 
         return Response(status=status.HTTP_204_NO_CONTENT)
 

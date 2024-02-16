@@ -1,5 +1,6 @@
 from typing import List
 
+from django.db.models import QuerySet
 from rest_framework.exceptions import PermissionDenied
 
 from cart.models import Cart
@@ -48,3 +49,7 @@ class CartCommandService:
 
         cart.delete()
         cart.save(update_fields=["is_deleted"])
+
+    @classmethod
+    def update_merchandise_is_deleted(cls, merchandise_id):
+        Cart.objects.filter(merchandise_id=merchandise_id).update(merchandise_is_deleted=True)
