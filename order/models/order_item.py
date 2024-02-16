@@ -18,3 +18,6 @@ class OrderItem(AbstractBaseModel):
     @staticmethod
     def create(order: Order, merchandise_id: int, price: int, amount: int) -> 'OrderItem':
         return OrderItem(order=order, merchandise_id=merchandise_id, price=price, amount=amount)
+
+    def calculate_item_total_price(self) -> int:
+        return self.price * self.amount

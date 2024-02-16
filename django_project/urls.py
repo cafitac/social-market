@@ -32,4 +32,5 @@ urlpatterns = [
     path('api/mail/', include("mail.routes")),
     path('api/member/', include('member.routes')),
     path('api/merchandise/', include('merchandise.routes')),
+    path('api/order/', include('order.routes')),
 ]
