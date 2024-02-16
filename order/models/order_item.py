@@ -7,6 +7,7 @@ from utils.model.base import AbstractBaseModel
 class OrderItem(AbstractBaseModel):
     order = models.ForeignKey(to=Order, related_name="order_items", on_delete=models.CASCADE, null=False)
     merchandise_id = models.IntegerField(null=False)
+    price = models.IntegerField(null=False)
     amount = models.IntegerField(null=False)
 
     class Meta:
@@ -15,5 +16,5 @@ class OrderItem(AbstractBaseModel):
         verbose_name_plural = f'{verbose_name} List'
 
     @staticmethod
-    def create(order: Order, merchandise_id: int, amount: int) -> 'OrderItem':
-        return OrderItem(order=order, merchandise_id=merchandise_id, amount=amount)
+    def create(order: Order, merchandise_id: int, price: int, amount: int) -> 'OrderItem':
+        return OrderItem(order=order, merchandise_id=merchandise_id, price=price, amount=amount)
