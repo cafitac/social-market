@@ -31,6 +31,9 @@ class Cart(AbstractBaseModel):
             amount=amount,
         )
 
+    def is_owner(self, user_id: int):
+        return self.user_id == user_id
+
     def update(self, update_data) -> List[str]:
         update_fields = []
 

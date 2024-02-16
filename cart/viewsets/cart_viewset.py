@@ -44,8 +44,9 @@ class CartViewSet(viewsets.GenericViewSet):
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     def partial_update(self, request, pk=None):
+        request_user: User = request.user
         update_serializer: CartUpdateSerializer = self.get_serializer(data=request.data)
-        cart_id: int = CartCommandService.update_cart(pk, update_serializer)
+        cart_id: int = CartCommandService.update_cart(request_user.id, pk, update_serializer)
         serializer: CartSerializer = CartQueryService.get_cart_response(cart_id)
 
         return Response(serializer.data, status=status.HTTP_200_OK)
