@@ -12,6 +12,8 @@ class CartViewTestCase(TestCase):
         fixture = TestFixture()
         self.사용자: User = fixture.active_user
         self.사용자.save()
+        self.기타_사용자: User = fixture.other_user
+        self.기타_사용자.save()
         self.상품_1: Merchandise = fixture.merchandise_1
         self.상품_1.save()
         self.상품_2: Merchandise = fixture.merchandise_2
@@ -68,6 +70,23 @@ class CartViewTestCase(TestCase):
 
         cart.refresh_from_db()
         self.assertEquals(cart.amount, 3)
+        
+    def test_기타_사용자는_사용자의_장바구니_상품_수를_수정할_수_없다(self):
+        # given
+        cart: Cart = self._사용자가_장바구니에_상품을_추가함(self.상품_1.id)
+        self.client.force_login(self.기타_사용자)
+
+        # when
+        res = self.client.patch(
+            path=f"/api/cart/carts/{cart.id}",
+            data={
+                "amount": 3,
+            },
+            content_type="application/json",
+        )
+
+        # then
+        self.assertEquals(res.status_code, 403)
 
     def test_사용자가_장바구니에_있는_상품을_제거할_수_있다(self):
         # given
@@ -81,6 +100,17 @@ class CartViewTestCase(TestCase):
 
         cart.refresh_from_db()
         self.assertTrue(cart.is_deleted)
+
+    def test_기타_사용자는_사용자의_장바구니_상품을_제거할_수_없다(self):
+        # given
+        cart: Cart = self._사용자가_장바구니에_상품을_추가함(self.상품_1.id)
+        self.client.force_login(self.기타_사용자)
+
+        # when
+        res = self.client.delete(path=f"/api/cart/carts/{cart.id}")
+
+        # then
+        self.assertEquals(res.status_code, 403)
 
     def _사용자가_장바구니에_상품을_추가함(self, merchandise_id: int) -> Cart:
         res = self.client.post(
