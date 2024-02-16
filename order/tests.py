@@ -49,6 +49,7 @@ class OrderViewTestCase(TestCase):
         order = Order.objects.get(pk=data['id'])
         self.assertTrue(Order.objects.filter(pk=data['id']).exists())
         self.assertEquals(order.order_items.count(), 2)
+        self.assertEquals(order.total_price(), (self.상품_1.price * 1) + (self.상품_2.price * 2))
         self.assertEquals(order.order_transaction.status, "READY")
 
     def test_사용자가_주문에_대한_결제를_할_수_있다(self):
