@@ -8,6 +8,15 @@ from cart.serializers.cart_serializer import CartSerializer
 class CartQueryService:
 
     @classmethod
+    def get_cart(cls, cart_id: int) -> Cart:
+        try:
+            cart: Cart = Cart.objects.get(pk=cart_id)
+        except Cart.DoesNotExist:
+            raise ValidationError("존재하지 않는 장바구니 정보입니다.")
+
+        return cart
+
+    @classmethod
     def get_cart_response(cls, cart_id: int) -> CartSerializer:
         try:
             cart: Cart = Cart.objects.get(pk=cart_id)

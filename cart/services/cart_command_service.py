@@ -1,5 +1,9 @@
+from typing import List
+
 from cart.models import Cart
 from cart.serializers.cart_create_serializer import CartCreateSerializer
+from cart.serializers.cart_update_serializer import CartUpdateSerializer
+from cart.services.cart_query_service import CartQueryService
 from merchandise.models import Merchandise
 from merchandise.services import MerchandiseQueryService
 
@@ -20,4 +24,13 @@ class CartCommandService:
             amount=create_serializer.validated_data['amount'],
         )
         cart.save()
+        return cart.id
+
+    @classmethod
+    def update_cart(cls, cart_id: int, update_serializer: CartUpdateSerializer) -> int:
+        update_serializer.is_valid(raise_exception=True)
+        cart: Cart = CartQueryService.get_cart(cart_id)
+        update_fields: List[str] = cart.update(update_serializer.validated_data)
+        cart.save(update_fields=update_fields)
+
         return cart.id

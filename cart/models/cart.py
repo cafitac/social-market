@@ -1,3 +1,5 @@
+from typing import List
+
 from django.db import models
 
 from utils.model.base import AbstractBaseModel
@@ -28,3 +30,12 @@ class Cart(AbstractBaseModel):
             merchandise_is_deleted=merchandise_is_deleted,
             amount=amount,
         )
+
+    def update(self, update_data) -> List[str]:
+        update_fields = []
+
+        for field_name, value in update_data.items():
+            update_fields.append(field_name)
+            setattr(self, field_name, value)
+
+        return update_fields
