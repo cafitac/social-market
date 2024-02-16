@@ -35,7 +35,8 @@ class OrderViewTestCase(TestCase):
                         "merchandise_id": self.상품_2.id,
                         "amount": 2,
                     }
-                ]
+                ],
+                "payment_type": "CARD",
             },
             content_type="application/json",
         )
@@ -45,8 +46,10 @@ class OrderViewTestCase(TestCase):
 
         data = res.json()
 
+        order = Order.objects.get(pk=data['id'])
         self.assertTrue(Order.objects.filter(pk=data['id']).exists())
-        self.assertEquals(Order.objects.get(pk=data['id']).order_transaction.status, "READY")
+        self.assertEquals(order.order_items.count(), 2)
+        self.assertEquals(order.order_transaction.status, "READY")
 
     def test_사용자가_주문에_대한_결제를_할_수_있다(self):
         pass
