@@ -111,6 +111,18 @@ class CartViewTestCase(TestCase):
 
         # then
         self.assertEquals(res.status_code, 403)
+        
+    def test_상품이_삭제되면_상품을_담은_장바구니에서도_삭제된_것으로_나타난다(self):
+        # given
+        cart: Cart = self._사용자가_장바구니에_상품을_추가함(self.상품_1.id)
+
+        # when
+        self._사용자가_상품을_삭제함(self.상품_1.id)
+
+        # then
+        cart.refresh_from_db()
+
+        self.assertTrue(cart.merchandise_is_deleted)
 
     def _사용자가_장바구니에_상품을_추가함(self, merchandise_id: int) -> Cart:
         res = self.client.post(
@@ -125,3 +137,7 @@ class CartViewTestCase(TestCase):
 
         data = res.json()
         return Cart.objects.get(pk=data['id'])
+
+    def _사용자가_상품을_삭제함(self, merchandise_id: int):
+        res = self.client.delete(path=f"/api/merchandise/merchandises/{merchandise_id}")
+        self.assertEquals(res.status_code, 204)
