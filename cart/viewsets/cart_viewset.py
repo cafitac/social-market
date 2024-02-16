@@ -52,6 +52,7 @@ class CartViewSet(viewsets.GenericViewSet):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def destroy(self, request, pk=None):
-        CartCommandService.delete_cart(pk)
+        request_user: User = request.user
+        CartCommandService.delete_cart(request_user.id, pk)
 
         return Response(status=status.HTTP_204_NO_CONTENT)

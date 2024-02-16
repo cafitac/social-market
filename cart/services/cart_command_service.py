@@ -41,7 +41,10 @@ class CartCommandService:
         return cart.id
 
     @classmethod
-    def delete_cart(cls, cart_id: int) -> None:
+    def delete_cart(cls, user_id: int, cart_id: int) -> None:
         cart: Cart = CartQueryService.get_cart(cart_id)
+        if not cart.is_owner(user_id):
+            raise PermissionDenied("장바구니를 삭제할 수 있는 권한이 없습니다.")
+
         cart.delete()
         cart.save(update_fields=["is_deleted"])
