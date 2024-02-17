@@ -1,7 +1,7 @@
 from mail.models import UserActiveMail
 from member.models import User
 from member.models.credit import Credit
-from merchandise.models import Merchandise
+from merchandise.models import Merchandise, Stock
 
 
 class TestFixture:
@@ -39,14 +39,7 @@ class TestFixture:
         # Merchandise
         self.merchandise_1 = Merchandise(id=1, username=self.active_user.username, name="상품1", price=10000)
         self.merchandise_2 = Merchandise(id=2, username=self.active_user.username, name="상품2", price=20000)
-        #
-        # # Cart
-        # self.cart = Cart(
-        #     id=1,
-        #     user_id=self.active_user.id,
-        #     merchandise_id=self.merchandise_1.id,
-        #     merchandise_name=self.merchandise_1.name,
-        #     merchandise_price=self.merchandise_1.price,
-        #     merchandise_is_deleted=self.merchandise_1.is_deleted,
-        #     amount=1,
-        # )
+
+        # Stock
+        self.stock_1 = Stock(merchandise_id=self.merchandise_1.id, count=10)
+        self.stock_2 = Stock(merchandise_id=self.merchandise_2.id, count=10)

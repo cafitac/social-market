@@ -1,7 +1,7 @@
 from django.test import TestCase
 
 from member.models import User
-from merchandise.models import Merchandise
+from merchandise.models import Merchandise, Stock
 from order.models.order import Order
 from utils.test.fixtures import TestFixture
 
@@ -16,8 +16,12 @@ class OrderViewTestCase(TestCase):
         self.크레딧.save()
         self.상품_1: Merchandise = testFixture.merchandise_1
         self.상품_1.save()
+        self.재고_1: Stock = testFixture.stock_1
+        self.재고_1.save()
         self.상품_2: Merchandise = testFixture.merchandise_2
         self.상품_2.save()
+        self.재고_2: Stock = testFixture.stock_2
+        self.재고_2.save()
 
         self.client.force_login(self.사용자)
 
@@ -61,9 +65,9 @@ class OrderViewTestCase(TestCase):
 
         # when
         res = self.client.post(
-            path=f"/api/order/payments",
+            path=f"/api/order/orders/payment",
             data={
-                "order_id": {order.id}
+                "order_id": order.id,
             },
             content_type="application/json",
         )
