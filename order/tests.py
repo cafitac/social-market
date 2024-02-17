@@ -12,6 +12,8 @@ class OrderViewTestCase(TestCase):
         testFixture: TestFixture = TestFixture()
         self.사용자: User = testFixture.active_user
         self.사용자.save()
+        self.기타사용자: User = testFixture.other_user
+        self.기타사용자.save()
         self.크레딧 = testFixture.credit
         self.크레딧.save()
         self.상품_1: Merchandise = testFixture.merchandise_1
@@ -79,6 +81,24 @@ class OrderViewTestCase(TestCase):
 
         order.refresh_from_db()
         self.assertEquals(order.order_transaction.status, "PAID")
+
+    def test_기타_사용자는_사용자의_주문에_대한_결제를_할_수_없다(self):
+        # given
+        order: Order = self._사용자가_주문을_생성함()
+        self._사용자가_크레딧을_충전함(100000)
+        self.client.force_login(self.기타사용자)
+
+        # when
+        res = self.client.post(
+            path=f"/api/order/orders/payment",
+            data={
+                "order_id": order.id,
+            },
+            content_type="application/json",
+        )
+
+        # then
+        self.assertEquals(res.status_code, 403)
 
     def _사용자가_주문을_생성함(self) -> Order:
         res = self.client.post(
