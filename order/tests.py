@@ -12,6 +12,8 @@ class OrderViewTestCase(TestCase):
         testFixture: TestFixture = TestFixture()
         self.사용자: User = testFixture.active_user
         self.사용자.save()
+        self.크레딧 = testFixture.credit
+        self.크레딧.save()
         self.상품_1: Merchandise = testFixture.merchandise_1
         self.상품_1.save()
         self.상품_2: Merchandise = testFixture.merchandise_2
@@ -53,9 +55,53 @@ class OrderViewTestCase(TestCase):
         self.assertEquals(order.order_transaction.status, "READY")
 
     def test_사용자가_주문에_대한_결제를_할_수_있다(self):
-        pass
         # given
+        order: Order = self._사용자가_주문을_생성함()
+        self._사용자가_크레딧을_충전함(100000)
 
         # when
+        res = self.client.post(path=f"/api/order/orders/{order.id}/payment")
 
         # then
+        self.assertEquals(res.status_code, 200)
+
+        data = res.json()
+
+        order.refresh_from_db()
+        self.assertEquals(order.order_transaction.status, "PAID")
+
+    def _사용자가_주문을_생성함(self) -> Order:
+        res = self.client.post(
+            path="/api/order/orders",
+            data={
+                "email": self.사용자.email,
+                "address": "서울시",
+                "order_items": [
+                    {
+                        "merchandise_id": self.상품_1.id,
+                        "amount": 1,
+                    },
+                    {
+                        "merchandise_id": self.상품_2.id,
+                        "amount": 2,
+                    }
+                ],
+                "payment_type": "CARD",
+            },
+            content_type="application/json",
+        )
+        self.assertEquals(res.status_code, 201)
+
+        data = res.json()
+
+        return Order.objects.get(pk=data['id'])
+
+    def _사용자가_크레딧을_충전함(self, amount: int):
+        res = self.client.post(
+            path="/api/member/users/credit",
+            data={
+                "charge_amount": amount,
+            },
+            content_type="application/json",
+        )
+        self.assertEquals(res.status_code, 200)
