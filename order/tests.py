@@ -42,7 +42,7 @@ class OrderViewTestCase(TestCase):
             },
             content_type="application/json",
         )
-    
+
         # then
         self.assertEquals(res.status_code, 201)
 
@@ -60,7 +60,13 @@ class OrderViewTestCase(TestCase):
         self._사용자가_크레딧을_충전함(100000)
 
         # when
-        res = self.client.post(path=f"/api/order/orders/{order.id}/payment")
+        res = self.client.post(
+            path=f"/api/order/payments",
+            data={
+                "order_id": {order.id}
+            },
+            content_type="application/json",
+        )
 
         # then
         self.assertEquals(res.status_code, 200)
