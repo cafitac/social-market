@@ -19,3 +19,7 @@ class Stock(AbstractBaseModel):
 
     def update_count(self, stock_count):
         self.count = stock_count
+
+    def decrease(self, amount):
+        self.count -= amount
+        self.save()

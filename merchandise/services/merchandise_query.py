@@ -1,7 +1,7 @@
 from django.db.models import Q, QuerySet
 from rest_framework.exceptions import ValidationError
 
-from merchandise.models import Merchandise
+from merchandise.models import Merchandise, Stock
 from merchandise.serializers.merchandise_serializer import MerchandiseSerializer
 from merchandise.serializers.stock_serializer import StockSerializer
 
@@ -45,8 +45,17 @@ class MerchandiseQueryService:
 
         return MerchandiseSerializer(merchandise)
 
-    @staticmethod
-    def get_stock_response(merchandise_id: int) -> StockSerializer:
+    @classmethod
+    def get_stock(cls, merchandise_id: int) -> Stock:
+        try:
+            merchandise: Merchandise = Merchandise.objects.get(pk=merchandise_id)
+        except Merchandise.DoesNotExist:
+            raise ValidationError("존재하지 않는 상품입니다.")
+
+        return merchandise.stock
+
+    @classmethod
+    def get_stock_response(cls, merchandise_id: int) -> StockSerializer:
         try:
             merchandise: Merchandise = Merchandise.objects.get(pk=merchandise_id)
         except Merchandise.DoesNotExist:

@@ -19,3 +19,7 @@ class Order(AbstractBaseModel):
 
     def total_price(self):
         return sum([x.calculate_item_total_price() for x in self.order_items.all()])
+
+    def paid(self):
+        self.order_transaction.status = "PAID"
+        self.order_transaction.save()

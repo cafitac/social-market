@@ -63,3 +63,9 @@ class MerchandiseCommandService:
         merchandise.stock.save(update_fields=['count'])
 
         return merchandise.id
+
+    @classmethod
+    def decrease_stock(cls, amount_datas: List[dict]) -> None:
+        for amount_data in amount_datas:
+            stock: Stock = MerchandiseQueryService.get_stock(amount_data['merchandise_id'])
+            stock.decrease(amount_data['amount'])

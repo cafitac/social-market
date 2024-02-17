@@ -42,6 +42,15 @@ class UserCommandService:
 
         return user_id
 
+    @classmethod
+    def use_credit(cls, user_id: int, amount: int) -> None:
+        try:
+            credit: Credit = Credit.objects.get(user_id=user_id)
+        except Credit.DoesNotExist:
+            return ValidationError("존재하지 않는 크레딧 정보입니다.")
+
+        credit.use(amount)
+
     def _check_before_save_user(self, serializer: UserCreateSerializer):
         self._check_username_is_exists(serializer.validated_data['username'])
         self._check_password_and_re_password_is_same(serializer.validated_data['password'],

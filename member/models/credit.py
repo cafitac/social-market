@@ -18,3 +18,8 @@ class Credit(models.Model):
 
     def charge(self, amount: int):
         self.balance += amount
+        self.save()
+
+    def use(self, amount: int):
+        self.balance -= amount
+        self.save()
