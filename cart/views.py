@@ -14,6 +14,7 @@ def get_carts(request):
     cart_data = {"data": []}
     for cart in carts:
         cart_data['data'].append({
+            "id": cart.id,
             "merchandise_name": cart.merchandise_name,
             "merchandise_price": cart.merchandise_price,
             "amount": cart.amount,

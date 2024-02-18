@@ -12,15 +12,56 @@
                         <p class="card-text">{{ merchandise.description }}</p>
                         <p class="card-text">가격 : {{ merchandise.price }}원</p>
                         <p class="card-text">등록자 : {{ merchandise.username }}</p>
-                        <a href="#" class="btn btn-primary">장바구니</a>
+                        <button type="button"
+                                class="btn btn-primary add-cart"
+                                data-merchandise-id="{{ merchandise.id }}"
+                                data-merchandise-name="{{ merchandise.name }}"
+                                data-bs-toggle="modal"
+                                data-bs-target="#addCartModal">
+                            장바구니
+                        </button>
                         <a href="#" class="btn btn-primary">구매하기</a>
                     </div>
                 </div>
             </div>
         {% endfor %}
     </div>
+
+    <!--AddCartModal-->
+    <div class="modal fade" id="addCartModal" tabindex="-1" aria-labelledby="addCArtModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="addCartModalLabel"><span id="merchandise-name"></span> 을 장바구니에
+                        추가하시겠습니까?</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="quantity" class="form-label">수량 선택:</label>
+                            <div class="input-group">
+                                <button class="btn btn-outline-secondary" type="button" id="decrementQuantity">-
+                                </button>
+                                <input type="number" class="form-control" id="quantity" value="1" min="1">
+                                <button class="btn btn-outline-secondary" type="button" id="incrementQuantity">+
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <span id="add-cart-merchandise-id" hidden="hidden"></span>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                    <button id="addCartConfirm" type="button" class="btn btn-danger">추가</button>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
 
 {% block script %}
     <script src="{% static 'js/merchandise/search.js' %}"></script>
+    <script src="{% static 'js/cart/addCart.js' %}"></script>
 {% endblock %}
