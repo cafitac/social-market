@@ -4,6 +4,7 @@ from member.models import Credit, User
 from member.serializers import UserCreateSerializer, UserSerializer
 from member.serializers.update_credit_serializer import UpdateCreditSerializer
 from member.services.user_query_service import UserQueryService
+from utils.exceptions.unprocessable_error import UnprocessableError
 
 
 class UserCommandService:
@@ -48,6 +49,9 @@ class UserCommandService:
             credit: Credit = Credit.objects.get(user_id=user_id)
         except Credit.DoesNotExist:
             return ValidationError("존재하지 않는 크레딧 정보입니다.")
+
+        if amount > credit.balance:
+            raise UnprocessableError("사용자의 크레딧이 부족합니다.")
 
         credit.use(amount)
 
