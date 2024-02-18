@@ -100,6 +100,22 @@ class OrderViewTestCase(TestCase):
         # then
         self.assertEquals(res.status_code, 403)
 
+    def test_사용자의_크레딧이_충분하지_않을_경우_주문에_대한_결제를_할_수_없다(self):
+        # given
+        order: Order = self._사용자가_주문을_생성함()
+
+        # when
+        res = self.client.post(
+            path=f"/api/order/orders/payment",
+            data={
+                "order_id": order.id,
+            },
+            content_type="application/json",
+        )
+
+        # then
+        self.assertEquals(res.status_code, 422)
+
     def _사용자가_주문을_생성함(self) -> Order:
         res = self.client.post(
             path="/api/order/orders",
