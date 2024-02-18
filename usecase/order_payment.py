@@ -1,8 +1,7 @@
 from django.db import transaction
+from rest_framework.exceptions import PermissionDenied
 
-from member.models import User
 from member.services.user_command_service import UserCommandService
-from member.services.user_query_service import UserQueryService
 from merchandise.services import MerchandiseCommandService
 from order.models import Order
 from order.serializers.order_serializer import OrderSerializer
@@ -18,6 +17,9 @@ class OrderPaymentUseCase:
     def execute(cls, user_id: int, payment_serializer: PaymentSerializer) -> OrderSerializer:
         payment_serializer.is_valid(raise_exception=True)
         order: Order = OrderQueryService.get_order(payment_serializer.validated_data['order_id'])
+
+        if not order.is_owner(user_id):
+            raise PermissionDenied("해당 주문을 결제할 수 있는 권한이 없습니다.")
 
         UserCommandService.use_credit(user_id, order.total_price())
 

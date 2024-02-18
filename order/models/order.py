@@ -23,3 +23,6 @@ class Order(AbstractBaseModel):
     def paid(self):
         self.order_transaction.status = "PAID"
         self.order_transaction.save()
+
+    def is_owner(self, user_id: int):
+        return self.user_id == user_id
