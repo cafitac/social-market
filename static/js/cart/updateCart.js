@@ -1,3 +1,34 @@
+$(".updateCartButton").on("click", function () {
+    const merchandiseName = $(this).data("merchandise-name");
+    $("#merchandise-name").text(merchandiseName);
+
+    const quantity = $(this).data("quantity");
+    $("#quantity").val(quantity);
+
+    const cartId = $(this).data("id");
+    $("#update-cart-id").text(cartId);
+});
+
+$("#incrementQuantity").click(function () {
+    var quantity = parseInt($("#quantity").val());
+    $("#quantity").val(quantity + 1);
+});
+
+$("#decrementQuantity").click(function () {
+    var quantity = parseInt($("#quantity").val());
+    if (quantity > 1) {
+        $("#quantity").val(quantity - 1);
+    }
+});
+
+$("#updateCartConfirm").on("click", function () {
+    const cartId = $("#update-cart-id").text()
+
+    updateCart(cartId, {
+        "amount": $("#quantity").val(),
+    });
+});
+
 function updateCart(cartId, data) {
     csrftoken = getCookie('csrftoken')
     fetch(`http://localhost:8000/api/cart/carts/${cartId}`, {

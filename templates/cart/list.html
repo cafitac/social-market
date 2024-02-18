@@ -26,7 +26,15 @@
                         <td>{{ cart.merchandise_price }} 원</td>
                         <td>{{ cart.amount }}</td>
                         <td>
-                            <button class="btn btn-secondary" onclick="updateCart('{{ cart.id }}')">수정</button>
+                            <button
+                                    class="btn btn-secondary updateCartButton"
+                                    data-id="{{ cart.id }}"
+                                    data-merchandise-name="{{ cart.merchandise_name }}"
+                                    data-quantity="{{ cart.amount }}"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#updateCartModal">
+                                수정
+                            </button>
                             <button class="btn btn-danger" onclick="removeCart('{{ cart.id }}')">제거</button>
                         </td>
                     </tr>
@@ -44,6 +52,39 @@
                 <button class="btn btn-primary">결제하기</button>
             </div>
         {% endif %}
+    </div>
+
+    <!--UpdateCartModal-->
+    <div class="modal fade" id="updateCartModal" tabindex="-1" aria-labelledby="updateCartModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="updateCartModalLabel"><span id="merchandise-name"></span> 의 수량을
+                        수정하시겠습니까?</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="quantity" class="form-label">수량 선택:</label>
+                            <div class="input-group">
+                                <button class="btn btn-outline-secondary" type="button" id="decrementQuantity">-
+                                </button>
+                                <input type="number" class="form-control" id="quantity" min="1">
+                                <button class="btn btn-outline-secondary" type="button" id="incrementQuantity">+
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <span id="update-cart-id" hidden="hidden"></span>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                    <button id="updateCartConfirm" type="button" class="btn btn-danger">수정</button>
+                </div>
+            </div>
+        </div>
     </div>
 {% endblock %}
 
