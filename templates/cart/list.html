@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container mt-5">
+        <h2>장바구니</h2>
+
+        {% if not carts %}
+            <div class="alert alert-info" role="alert">
+                장바구니가 비었습니다.
+            </div>
+        {% else %}
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>상품명</th>
+                    <th>가격</th>
+                    <th>수량</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for cart in carts.data %}
+                    <tr>
+                        <td>{{ cart.merchandise_name }}</td>
+                        <td>{{ cart.merchandise_price }} 원</td>
+                        <td>{{ cart.amount }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+            <!-- 총 금액 합산 -->
+            <div class="text-right">
+                <h4>총 금액: {{ carts.total_price }} 원</h4>
+            </div>
+
+            <!-- 결제하기 버튼 -->
+            <div class="text-right mt-4">
+                <button class="btn btn-primary">결제하기</button>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}
