@@ -116,6 +116,25 @@ class OrderViewTestCase(TestCase):
         # then
         self.assertEquals(res.status_code, 422)
 
+    def test_상품의_재고가_충분하지_않을_경우_주문에_대한_결제를_할_수_없다(self):
+        # given
+        order: Order = self._사용자가_주문을_생성함()
+        self._사용자가_크레딧을_충전함(100000)
+        self.재고_2.count = 0
+        self.재고_2.save()
+
+        # when
+        res = self.client.post(
+            path=f"/api/order/orders/payment",
+            data={
+                "order_id": order.id,
+            },
+            content_type="application/json",
+        )
+
+        # then
+        self.assertEquals(res.status_code, 422)
+
     def _사용자가_주문을_생성함(self) -> Order:
         res = self.client.post(
             path="/api/order/orders",
