@@ -8,6 +8,7 @@ from merchandise.serializers.merchandise_update_serializer import MerchandiseUpd
 from merchandise.serializers.stock_serializer import StockSerializer
 from merchandise.serializers.stock_update_serializer import StockUpdateSerializer
 from merchandise.services.merchandise_query import MerchandiseQueryService
+from utils.exceptions.unprocessable_error import UnprocessableError
 
 
 class MerchandiseCommandService:
@@ -68,4 +69,8 @@ class MerchandiseCommandService:
     def decrease_stock(cls, amount_datas: List[dict]) -> None:
         for amount_data in amount_datas:
             stock: Stock = MerchandiseQueryService.get_stock(amount_data['merchandise_id'])
+
+            if amount_data['amount'] > stock.count:
+                raise UnprocessableError("상품 재고가 부족합니다.")
+
             stock.decrease(amount_data['amount'])
