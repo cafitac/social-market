@@ -15,9 +15,9 @@ class OrderItem(AbstractBaseModel):
         verbose_name = 'OrderItem'
         verbose_name_plural = f'{verbose_name} List'
 
-    @staticmethod
-    def create(order: Order, merchandise_id: int, price: int, amount: int) -> 'OrderItem':
-        return OrderItem(order=order, merchandise_id=merchandise_id, price=price, amount=amount)
+    @classmethod
+    def create(cls, order: Order, merchandise_id: int, price: int, amount: int) -> 'OrderItem':
+        return cls(order=order, merchandise_id=merchandise_id, price=price, amount=amount)
 
     def calculate_item_total_price(self) -> int:
         return self.price * self.amount

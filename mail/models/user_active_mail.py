@@ -20,10 +20,10 @@ class UserActiveMail(AbstractBaseModel):
         verbose_name = "User Active Mail"
         verbose_name_plural = f"{verbose_name} List"
 
-    @staticmethod
-    def create(user_id):
+    @classmethod
+    def create(cls, user_id):
         active_code: str = str(uuid4()) + str(time())
-        return UserActiveMail(user_id=user_id, active_code=active_code)
+        return cls(user_id=user_id, active_code=active_code)
 
     def expired(self):
         self.is_expired = True

@@ -8,6 +8,6 @@ class User(AbstractUser):
         verbose_name = 'User'
         verbose_name_plural = f'{verbose_name} List'
 
-    @staticmethod
-    def create(username: str, password: str, email: str) -> User:
-        return User(username=username, password=make_password(password), email=email, is_active=False)
+    @classmethod
+    def create(cls, username: str, password: str, email: str) -> User:
+        return cls(username=username, password=make_password(password), email=email, is_active=False)

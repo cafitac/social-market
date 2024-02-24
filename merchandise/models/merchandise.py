@@ -17,9 +17,9 @@ class Merchandise(AbstractBaseModel):
         verbose_name = "Merchandise"
         verbose_name_plural = f"{verbose_name} List"
 
-    @staticmethod
-    def create(username: str, name: str, description: str, price: int) -> 'Merchandise':
-        return Merchandise(username=username, name=name, description=description, price=price)
+    @classmethod
+    def create(cls, username: str, name: str, description: str, price: int) -> 'Merchandise':
+        return cls(username=username, name=name, description=description, price=price)
 
     def is_owner(self, username: str):
         return self.username == username

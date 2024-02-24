@@ -16,9 +16,9 @@ class OrderTransaction(AbstractBaseModel):
         verbose_name = 'OrderTransaction'
         verbose_name_plural = f'{verbose_name} List'
 
-    @staticmethod
-    def create(order: Order, total_price: int, payment_type: str) -> 'OrderTransaction':
-        return OrderTransaction(
+    @classmethod
+    def create(cls, order: Order, total_price: int, payment_type: str) -> 'OrderTransaction':
+        return cls(
             order=order,
             total_price=total_price,
             payment_type=payment_type,

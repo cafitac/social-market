@@ -13,9 +13,9 @@ class Stock(AbstractBaseModel):
         verbose_name = 'Stock'
         verbose_name_plural = f'{verbose_name} List'
 
-    @staticmethod
-    def create(merchandise: Merchandise) -> 'Stock':
-        return Stock(merchandise=merchandise)
+    @classmethod
+    def create(cls, merchandise: Merchandise) -> 'Stock':
+        return cls(merchandise=merchandise)
 
     def update_count(self, stock_count):
         self.count = stock_count

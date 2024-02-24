@@ -12,9 +12,9 @@ class Credit(models.Model):
         verbose_name = 'Credit'
         verbose_name_plural = f'{verbose_name} List'
 
-    @staticmethod
-    def create(user: User) -> 'Credit':
-        return Credit(user=user)
+    @classmethod
+    def create(cls, user: User) -> 'Credit':
+        return cls(user=user)
 
     def charge(self, amount: int):
         self.balance += amount

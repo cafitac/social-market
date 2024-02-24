@@ -19,10 +19,10 @@ class Cart(AbstractBaseModel):
         verbose_name = "Cart"
         verbose_name_plural = f"{verbose_name} List"
 
-    @staticmethod
-    def create(user_id: int, merchandise_id: int, merchandise_name: str, merchandise_price: int, amount: int,
+    @classmethod
+    def create(cls, user_id: int, merchandise_id: int, merchandise_name: str, merchandise_price: int, amount: int,
                merchandise_is_deleted: bool) -> 'Cart':
-        return Cart(
+        return cls(
             user_id=user_id,
             merchandise_id=merchandise_id,
             merchandise_name=merchandise_name,
